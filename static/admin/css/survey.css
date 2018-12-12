@@ -1,0 +1,17 @@
+.bar {
+  padding: 10px;
+  display: inline-block;
+}
+
+.bar, .chart__d{
+  width: 48%;
+  box-sizing: border-box
+}
+/* canvas{
+
+    width:1000px !important;
+    height:600px !important;
+  
+  } */
+
+

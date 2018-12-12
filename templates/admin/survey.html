@@ -1,0 +1,152 @@
+{% extends "admin/change_list.html" %}
+
+
+{% block content_title %}
+    <h1> Survey </h1>
+{% endblock %}
+
+{% block extrahead %}
+    {{block.super}}
+    <script>
+
+        var labels = [
+        {% for data in durasi %}
+            "{{data.2}}",
+        {% endfor %}
+        ];
+
+        var data = [
+        {% for k in durasi %}
+            {{k.3}},    
+        {% endfor %}
+        ];
+
+        var dapet_pekerjaan_labels = [
+        {% for data in pekerjaan %}
+            "{{data.2}}",
+        {% endfor %}
+        ];
+
+        var data_tot_pekerja = [
+
+        {% for k in pekerjaan %}
+            {{k.3}},
+        {% endfor %}
+        ];
+
+        var pekerjaan_pertama_labels = [
+            {% for data in pertama %}
+                "{{data.2}}",
+            {% endfor %}
+        ];
+
+        var data_pekerjaan_pertama = [
+            {% for data in pertama %}
+                {{data.3}},
+            {% endfor %}
+        ];
+
+        
+        var penghasilan_labels = [
+            {% for data in penghasilan %}
+                "{{data.2}}",
+            {% endfor %}
+        ]
+
+        var data_penghasilan_pertama = [
+            {% for data in penghasilan %}
+                {{data.3}},
+            {% endfor %}
+        ]
+
+        
+        var sesuai_labels = [
+            {% for data in sesuai %}
+                "{{data.2}}",
+            {% endfor %}
+        ]
+
+        var data_sesuai = [
+            {% for data in sesuai %}
+                {{data.3}},
+            {% endfor %}
+        ]
+        
+        
+        var ipk_label = [
+            {% for data in ipk %}
+                "{{data.2}}",
+            {% endfor %}
+        ]
+
+        var data_ipk = [
+            {% for data in ipk %}
+                {{data.3}},
+            {% endfor %}
+        ]
+    
+    </script>
+{% endblock %}
+
+{% block result_list %}
+<div class="bar">
+    <canvas id="study" class="chart__d" width="200" height="200"></canvas>
+</div>
+<div class="bar">
+    <canvas id="dapat_pekerjaan" class="chart__d" width="200" height="200"></canvas>
+</div>
+<div class="bar">
+    <canvas id="pekerjaan_pertama" class="chart__d" width="200" height="200"></canvas>
+</div>
+
+<div class="bar">
+    <canvas id="penghasilan_pertama" class="chart__d" width="200" height="200"></canvas>
+</div>
+
+
+<div class="bar">
+    <canvas id="sesuai_pekerjaan" class="chart__d" width="200" height="200"></canvas>
+</div>
+
+<div class="bar">
+    <canvas id="ipk_kelulusan" class="chart__d" width="200" height="200"></canvas>
+</div>
+
+    <div class="result">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        <div class="text">
+                            <a href="#">value</a>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="text">
+                            <a href="#">jawaban</a>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="text">
+                            <a href="#">total</a>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for k in survey %}
+                <tr>
+                    <td>{{k.0}}</td>
+                    <td>{{k.1}}</td>
+                    <td>{{k.2}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+
+{% block pagination %}{% endblock %}
+

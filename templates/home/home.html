@@ -1,0 +1,76 @@
+
+{% extends 'base.html'%}
+{% load static %}
+
+{% block header %}
+
+<title>home</title>
+<link rel="stylesheet" href="{% static 'base.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<main>
+    <section id="section-overview">
+        <div class="center-text">
+            <h1>Tracer Study</h1>
+            <h2>Make a University Great Again</h2>
+        </div>
+    </section>
+    <section id="section-image">
+            <div class="container">
+                <div class="row section-items">
+                    <div class="col-xl-4 col-sm-12">
+                        <h3 id="section-title">Chart Js</h3>
+                        <p>Irure Lorem proident deserunt pariatur consequat fugiat cillum labore magna excepteur consequat eiusmod. Dolore cillum cillum amet dolore fugiat laborum ipsum amet Lorem. Et commodo ea exercitation amet cupidatat nulla. Fugiat sunt occaecat sint enim Lorem eu culpa.</p>
+                    </div>
+                    <div class="col-xl-8 col-sm-12">
+                        <img src="{% static 'img/layout-1.png'%}" class="img-fluid img-left" alt="">
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <section id="section-image-second">
+        <div class="container">
+            <div class="row section-items">
+                <div class="col-xl-8 col-sm-12">
+                    <img src="{% static 'img/layout-2.png'%}" class="img-fluid img-right" alt="">
+                </div>
+                <div class="col-xl-4 col-sm-12">
+                        <h3 id="section-title">Survey</h3>
+                        <p>Irure Lorem proident deserunt pariatur consequat fugiat cillum labore magna excepteur consequat eiusmod. Dolore cillum cillum amet dolore fugiat laborum ipsum amet Lorem. Et commodo ea exercitation amet cupidatat nulla. Fugiat sunt occaecat sint enim Lorem eu culpa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="section-description">
+        <div class="container">
+            <h1 class="section-title">Hallo World</h1>
+            <div class="row">
+                <div class="col-xl-6 col-sm-12">
+                        <h3>Hallo</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam quidem pariatur nulla officia veritatis officiis, error tempora necessitatibus, ipsa inventore voluptatibus assumenda, odit iusto eius quas facilis voluptate! Quisquam, ab!</p>
+                </div>
+                <div class="col-xl-6 col-sm-12">
+                        <h3>Hallo</h3>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis veniam nam minima iste ullam voluptate laudantium veritatis laborum cum inventore dolorem provident maxime mollitia in, sapiente sed doloribus blanditiis aut.</p>
+                </div>
+            </div>       
+        </div>
+    </section>
+</main>
+
+{% endblock %}
+
+{% block footer %}
+<footer class="main-footer">
+    <ul class="link-footer__link">
+        <li>settings</li>
+        <li>halo</li>
+    </ul>  
+  </footer>
+
+{% endblock%}
