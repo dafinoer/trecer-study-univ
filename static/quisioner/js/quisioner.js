@@ -164,7 +164,7 @@ var surveyJSON ={
       return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
    }
 
-    function sendDataToServer(survey) {
+   function sendDataToServer(survey) {
         //send Ajax request to your web server.
         $.ajax({
             type: "POST",

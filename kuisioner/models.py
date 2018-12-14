@@ -41,6 +41,7 @@ class Survey(models.Model):
     id = models.AutoField(primary_key=True)
     value = models.TextField(blank=True)
     question = models.ForeignKey(Question, on_delete=models.CASCADE, db_column='question_id')
+    kategories = models.ForeignKey(Kategori, on_delete=models.CASCADE, db_column='kuestion_id', default=1)
     crated_at = models.DateTimeField(default=datetime.datetime.now, blank=True)
 
     class Meta:

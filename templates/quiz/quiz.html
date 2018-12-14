@@ -11,7 +11,6 @@
 {% block body %}
 
 
-
 <div class="container">
     <h4>{{title}}</h4>
     
@@ -25,5 +24,6 @@
 
 {% csrf_token %}
 <script src="https://surveyjs.azureedge.net/1.0.56/survey.jquery.min.js"></script>
-<script src="{% static 'quisioner/js/quisioner.js'%}"></script>
+<!-- <script src="{% static 'quisioner/js/quisioner.js'%}"></script> -->
+<script src="{% static 'quisioner/js/newbase.js'%}"></script>
 {% endblock%}
