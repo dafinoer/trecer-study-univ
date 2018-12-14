@@ -1,5 +1,11 @@
+__pycache__/
+
+
 .env
+.ENV
 .vscode
 .idea
-__pycache__
+
+
+
 
