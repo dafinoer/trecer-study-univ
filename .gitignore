@@ -1,6 +1,5 @@
-.vscode
-
-.idea
-/env
-__pycache__
 .env
+.vscode
+.idea
+__pycache__
+
