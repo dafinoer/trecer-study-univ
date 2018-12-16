@@ -135,15 +135,74 @@
             </thead>
 
             <tbody>
-                {% for k in survey %}
+                <!-- {% for k in survey %}
                 <tr>
                     <td>{{k.0}}</td>
                     <td>{{k.1}}</td>
                     <td>{{k.2}}</td>
                 </tr>
+                {% endfor %} -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="result">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        <div class="text">
+                            <a href="#">kategori</a>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="text">
+                            <a href="#">sangat buruk [1] </a>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="text">
+                            <a href="#">buruk [2]</a>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="text">
+                            <a href="#">cukup [3]</a>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="text">
+                            <a href="#">baik [4]</a>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="text">
+                            <a href="#">sangat baik [5]</a>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+
+
+            <tbody>
+
+                {% for data in pembelajaran %}
+                <tr>
+                    {% for key, value in data.items %}
+                    <td>{{value}}</td>
+                    {% endfor %}
+
+
+                    <!-- <td>{{data.5}}</td>
+                    <td>{{data.4}}</td>
+                    <td>{{data.3}}</td>
+                    <td>{{data.2}}</td>
+                    <td>{{data.1}}</td> -->
+                </tr>
                 {% endfor %}
             </tbody>
         </table>
+
     </div>
 
 {% endblock %}

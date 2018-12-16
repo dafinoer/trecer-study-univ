@@ -12,7 +12,7 @@ class Kategori(models.Model):
 
     class Meta:
         db_table = 'kategori'
-
+    
     def __unicode__(self):
         return self.tanya
 

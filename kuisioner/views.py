@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
 import json
+import logging
 from django.http import HttpResponse
 # Create your views here.
 from django.contrib.auth.decorators import login_required
@@ -13,6 +14,8 @@ from django.views.decorators.csrf import csrf_exempt
 from .forms import MahasiswaForm
 
 from .models import Kategori, Question, Survey
+
+logger = logging.getLogger(__name__)
 
 class NimLogin(View):
 
@@ -49,18 +52,51 @@ class Quizioner(LoginRequiredMixin, View):
         # print('ini adalah {}'.format(k))
 
         to_sjson = json.loads(k)
-        
+
+        print(to_sjson)
+
         try:
+
             for key, value in to_sjson.items():
 
-                get_id_question = Question.objects.get(id=int(value))
+                if key == '8':
+                    print('ini value pertama value > ',value)
+                    for k, v in value.items():
 
-                data = Survey(value=key, question=get_id_question)
+                        value_data = v['rating']
+                        
+                        get_id = Question.objects.get(id=int(k))
 
-                data.save()
+                        get_id_kategori = Kategori.objects.get(id=int(key))
+
+                        # survey = Survey(value=value_data, question=get_id, kategories=get_id_kategori)
+
+                        # survey.save()
+
+                elif key == '9':
+                    print('ini value kedua valuenya > ',value)
+
+                elif key == '10':
+                    print('ini value ketiga valuenya > ',value)
+                else:
+                    print('no data')
+                
+
 
         except Exception as e:
             print(e)
+        
+        # try:
+        #     for key, value in to_sjson.items():
+
+        #         get_id_question = Question.objects.get(id=int(value))
+
+        #         data = Survey(value=key, question=get_id_question)
+
+        #         data.save()
+
+        # except Exception as e:
+        #     print(e)
 
         
         get_data = {

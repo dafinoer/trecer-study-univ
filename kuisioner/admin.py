@@ -4,6 +4,9 @@ from django.template.response import TemplateResponse
 from django.urls import path
 import logging
 from django.db import connection
+from django.db.models import Q
+from django.db.models import Count
+
 
 admin.site.site_header = "Admin Page"
 
@@ -78,13 +81,13 @@ class SurveyAdmin(admin.ModelAdmin):
             pekerjaan = cursor.fetchall()
             
             print(pekerjaan)
-
-        return pekerjaan
-    
-    def pekerjaan_pertama(self):
-        with connection.cursor() as cursor:
-            cursor.execute(self.query_sql(3))
-
+            Kategori.objects.filter(id=8)
+            Kategori.objects.filter(id=8)
+            Kategori.objects.filter(id=8)
+            Kategori.objects.filter(id=8)
+            Kategori.objects.filter(id=8)
+            Kategori.objects.filter(id=8)
+            Kategori.objects.filter(id=8)
             pertama = cursor.fetchall()
 
             print(pertama)
@@ -113,18 +116,73 @@ class SurveyAdmin(admin.ModelAdmin):
 
             ipk =  cursor.fetchall()
         
-        return ipk
+        return 
     
+    def pembelajaran(self):
+
+        get_question_id = Question.objects.filter(ketegories_id=8)
+
+
+        id_rating_belajar = [data.id for data in get_question_id]
+
+
+        data_lst = []
+
+        for value_id in get_question_id:
+
+            value_dict = {}
+            sangat_buruk_1 = 0
+            buruk_2 = 0
+            cukup_3 = 0
+            baik_4 = 0
+            sangat_baik = 0
+
+            query_get_jumlah=Survey.objects.values('value').annotate(
+                type_count=Count('value')
+                ).filter(question_id=value_id.id).order_by('-type_count')
+    
+
+            for data in query_get_jumlah:
+
+                if data['value'] == '5':
+                    sangat_baik = data['type_count']
+                elif data['value'] == '4':
+                    baik_4 = data['type_count']
+                elif data['value'] == '3':
+                    cukup_3 = data['type_count']
+                elif data['value'] == '2':
+                    buruk_2 = data['type_count']
+                elif data['value'] == '1':
+                    sangat_buruk_1 = data['type_count']
+                else:
+                    print('not found') 
+            
+
+            value_dict["tanya"]=value_id.jawaban
+            value_dict["sangat_buruk"] = sangat_buruk_1
+            value_dict["buruk"] = buruk_2
+            value_dict["cukup"] = cukup_3
+            value_dict["baik"] = baik_4
+            value_dict["sangat_baik"] = sangat_baik
+            
+            data_lst.append(value_dict)
+
+        
+        print('print data ',data_lst)
+
+        return data_lst
+        
 
     def changelist_view(self, request, extra_context=None):
         extra_context = extra_context or {}
         extra_context['survey'] = self.survey_jawaban()
         extra_context['durasi'] = self.durasi()
         extra_context['pekerjaan'] = self.dapat_pekerjaan()
-        extra_context['pertama'] = self.pekerjaan_pertama()
+        # extra_context['pertama'] = self.pekerjaan_pertama()
         extra_context['penghasilan'] = self.penghasilan_pertama()
         extra_context['sesuai'] = self.sesuai_pekerjaan()
         extra_context['ipk'] = self.ipk_kelulusan()
+        extra_context["pembelajaran"] = self.pembelajaran()
 
         return super().changelist_view(
             request, extra_context=extra_context
