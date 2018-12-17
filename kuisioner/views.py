@@ -75,6 +75,23 @@ class Quizioner(LoginRequiredMixin, View):
 
                 elif key == '9':
                     print('ini value kedua valuenya > ',value)
+                    
+                    for k, v in value.items():
+                        print(k)
+                        print(v)
+
+                        get_id = Question.objects.get(id=int(k))
+
+                        get_id_kategori = Kategori.objects.get(id=int(key))
+
+                        try:
+
+                            survey = Survey(value=int(v), question=get_id, kategories=get_id_kategori)
+                            survey.save()
+
+                        except ValueError as e:
+                            print(e)
+
 
                 elif key == '10':
                     print('ini value ketiga valuenya > ',value)

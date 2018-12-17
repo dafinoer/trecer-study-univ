@@ -6,6 +6,7 @@ import logging
 from django.db import connection
 from django.db.models import Q
 from django.db.models import Count
+import collections
 
 
 admin.site.site_header = "Admin Page"
@@ -122,10 +123,6 @@ class SurveyAdmin(admin.ModelAdmin):
 
         get_question_id = Question.objects.filter(ketegories_id=8)
 
-
-        id_rating_belajar = [data.id for data in get_question_id]
-
-
         data_lst = []
 
         for value_id in get_question_id:
@@ -167,8 +164,42 @@ class SurveyAdmin(admin.ModelAdmin):
             
             data_lst.append(value_dict)
 
-        
-        print('print data ',data_lst)
+        # print('print data ',data_lst)
+
+        return data_lst
+    
+    def pencarian_kerja(self):
+
+        get_question_id = Question.objects.filter(ketegories_id=9)
+
+        data_lst = []
+
+        for data in get_question_id:
+
+            value_dict = {}
+
+            get_average = 0
+
+            survey_bulan = Survey.objects.filter(question_id=data.id)
+
+            data_avg =[int(data.value) for data in survey_bulan]
+
+            calculate_avg = collections.Counter(data_avg)
+
+            for k in data_avg:
+                get_average +=k
+
+            print(get_average)
+
+            calculate_avg = get_average / len(data_avg)
+
+
+            value_dict['jawaban'] = data.jawaban
+            value_dict['average'] = calculate_avg
+            value_dict['responden'] = len(data_avg)
+            
+            data_lst.append(value_dict)
+
 
         return data_lst
         
@@ -182,7 +213,10 @@ class SurveyAdmin(admin.ModelAdmin):
         extra_context['penghasilan'] = self.penghasilan_pertama()
         extra_context['sesuai'] = self.sesuai_pekerjaan()
         extra_context['ipk'] = self.ipk_kelulusan()
+
+
         extra_context["pembelajaran"] = self.pembelajaran()
+        extra_context['pencarian_kerja'] = self.pencarian_kerja()
 
         return super().changelist_view(
             request, extra_context=extra_context
@@ -201,8 +235,6 @@ class SurveyAdmin(admin.ModelAdmin):
         
         return query_sql
     
-
-
 
 # class SurveyAdmin(admin.ModelAdmin):
     

@@ -10,10 +10,10 @@ var surveyJSON = {
             enableIf: "{2321} ==== /^\\d+$/",
             isRequired: true,
             items: [{
-                name: "text1",
+                name: "48",
                 title: "bulan sebelum lulus"
             }, {
-                name: "text2",
+                name: "49",
                 title: "bulan setelah lulus"
             }],
             itemSize: 3

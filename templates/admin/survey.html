@@ -191,18 +191,49 @@
                     {% for key, value in data.items %}
                     <td>{{value}}</td>
                     {% endfor %}
-
-
-                    <!-- <td>{{data.5}}</td>
-                    <td>{{data.4}}</td>
-                    <td>{{data.3}}</td>
-                    <td>{{data.2}}</td>
-                    <td>{{data.1}}</td> -->
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
 
+    </div>
+
+
+    <div class="result">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        <div class="text">
+                            <a href="#">Kategori</a>
+                        </div>
+                    </th>
+    
+                    <th>
+                        <div class="text">
+                            <a href="#">average</a>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="text">
+                            <a href="#">responden</a>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                    {% for data in pencarian_kerja %}
+                <tr>
+                    {% for k, v in data.items %}
+                    <td>{{v}}</td>
+                    {% endfor %}
+                    
+                </tr>
+                {% endfor %}    
+            </tbody>
+        </table>
+        
     </div>
 
 {% endblock %}
