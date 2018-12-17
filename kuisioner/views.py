@@ -37,6 +37,21 @@ class Quizioner(LoginRequiredMixin, View):
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
 
+    def get_id_kuestion(self, key, value):
+        get_id = Question.objects.get(id=int(key))
+        get_id_kategori = Kategori.objects.get(id=int(key))
+
+        return get_id_kategori
+    
+    def query_save_database(self, *args, **kwargs):
+
+        try:
+            survey = Survey(value=int(value), question=object, kategories=object)
+        except expression as identifier:
+            pass
+
+
+
     def get(self, request, *args, **kwargs):
 
         cntx = {
@@ -53,14 +68,13 @@ class Quizioner(LoginRequiredMixin, View):
 
         to_sjson = json.loads(k)
 
-        print(to_sjson)
-
         try:
 
             for key, value in to_sjson.items():
 
                 if key == '8':
                     print('ini value pertama value > ',value)
+
                     for k, v in value.items():
 
                         value_data = v['rating']
@@ -84,17 +98,32 @@ class Quizioner(LoginRequiredMixin, View):
 
                         get_id_kategori = Kategori.objects.get(id=int(key))
 
-                        try:
+                        # try:
 
-                            survey = Survey(value=int(v), question=get_id, kategories=get_id_kategori)
-                            survey.save()
+                        #     survey = Survey(value=int(v), question=get_id, kategories=get_id_kategori)
+                        #     survey.save()
 
-                        except ValueError as e:
-                            print(e)
+                        # except ValueError as e:
+                        #     print(e)
 
 
                 elif key == '10':
                     print('ini value ketiga valuenya > ',value)
+
+                    for data in value:
+                        print(type(data))
+
+                        get_id = Question.objects.get(id=int(data))
+
+                        get_id_kategori = Kategori.objects.get(id=int(key))
+
+                        try:
+
+                            survey = Survey(value=int(data), question=get_id, kategories=get_id_kategori)
+                            survey.save()
+                        except Exception as identifier:
+                            print(identifier)
+
                 else:
                     print('no data')
                 
@@ -121,6 +150,9 @@ class Quizioner(LoginRequiredMixin, View):
         }
         
         return HttpResponse(get_data)
+
+
+    
 
 
 
