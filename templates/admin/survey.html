@@ -9,6 +9,7 @@
     {{block.super}}
     <script>
 
+        /*
         var labels = [
         {% for data in durasi %}
             "{{data.2}}",
@@ -84,11 +85,14 @@
                 {{data.3}},
             {% endfor %}
         ]
+        */
     
     </script>
 {% endblock %}
 
 {% block result_list %}
+
+<!--
 <div class="bar">
     <canvas id="study" class="chart__d" width="200" height="200"></canvas>
 </div>
@@ -111,7 +115,7 @@
 <div class="bar">
     <canvas id="ipk_kelulusan" class="chart__d" width="200" height="200"></canvas>
 </div>
-
+-->
     <div class="result">
         <table>
             <thead>
@@ -228,12 +232,33 @@
                     {% for k, v in data.items %}
                     <td>{{v}}</td>
                     {% endfor %}
-                    
                 </tr>
                 {% endfor %}    
             </tbody>
         </table>
-        
+    </div>
+
+    <div class="result">
+        <table>
+            <thead>
+                <tr>
+                    <th><div class="text"><a href="#">value</a></div></th>
+                    <th><div class="text"><a href="#">total</a></div></th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for data in cari_kerja %}
+                <tr>
+
+                    {% for k, v in data.items %}
+                        <td>{{v}}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
 {% endblock %}

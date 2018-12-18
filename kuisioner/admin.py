@@ -66,58 +66,15 @@ class SurveyAdmin(admin.ModelAdmin):
         
         return row
     
-    def durasi(self):
-        with connection.cursor() as cursor:
-           cursor.execute(self.query_sql(1))
-           data = cursor.fetchall()
+    # def durasi(self):
+    #     with connection.cursor() as cursor:
+    #        cursor.execute(self.query_sql(1))
+    #        data = cursor.fetchall()
 
-           print(data)
+    #        print(data)
 
-        return data
+    #     return data
     
-    def dapat_pekerjaan(self):
-        with connection.cursor() as cursor:
-            cursor.execute(self.query_sql(2))
-
-            pekerjaan = cursor.fetchall()
-            
-            print(pekerjaan)
-            Kategori.objects.filter(id=8)
-            Kategori.objects.filter(id=8)
-            Kategori.objects.filter(id=8)
-            Kategori.objects.filter(id=8)
-            Kategori.objects.filter(id=8)
-            Kategori.objects.filter(id=8)
-            Kategori.objects.filter(id=8)
-            pertama = cursor.fetchall()
-
-            print(pertama)
-        
-        return pertama
-    
-    def penghasilan_pertama(self):
-        with connection.cursor() as cursor:
-            cursor.execute(self.query_sql(4))
-
-            pnghsilan_pertama = cursor.fetchall()
-        
-        return pnghsilan_pertama
-    
-    def sesuai_pekerjaan(self):
-        with connection.cursor() as cursor:
-            cursor.execute(self.query_sql(5))
-
-            sesuai = cursor.fetchall()
-        
-        return sesuai
-    
-    def ipk_kelulusan(self):
-        with connection.cursor() as cursor:
-            cursor.execute(self.query_sql(7))
-
-            ipk =  cursor.fetchall()
-        
-        return 
     
     def pembelajaran(self):
 
@@ -189,7 +146,6 @@ class SurveyAdmin(admin.ModelAdmin):
             for k in data_avg:
                 get_average +=k
 
-            print(get_average)
 
             calculate_avg = get_average / len(data_avg)
 
@@ -202,21 +158,46 @@ class SurveyAdmin(admin.ModelAdmin):
 
 
         return data_lst
-        
+    
+    def cara_cari_kerja(self):
+        # pertanyaan F3
+        get_question_id = Question.objects.filter(ketegories_id=10)
+
+        data_dst=[]
+
+        for data in get_question_id:
+
+            value_dict= {}
+
+            survey_data = Survey.objects.values('value').annotate(
+                type_count=Count('value')
+            ).filter(question_id=data.id).order_by('-type_count')
+
+            print(survey_data)
+
+            if len(survey_data) != 0:
+                value_total = survey_data[0]['type_count']
+            else:
+                value_total = 0
+
+            value_dict['jawaban'] = data.jawaban
+            value_dict['total'] = value_total
+
+            data_dst.append(value_dict)
+
+        print(data_dst)
+
+        return data_dst
+
 
     def changelist_view(self, request, extra_context=None):
         extra_context = extra_context or {}
         extra_context['survey'] = self.survey_jawaban()
-        extra_context['durasi'] = self.durasi()
-        extra_context['pekerjaan'] = self.dapat_pekerjaan()
-        # extra_context['pertama'] = self.pekerjaan_pertama()
-        extra_context['penghasilan'] = self.penghasilan_pertama()
-        extra_context['sesuai'] = self.sesuai_pekerjaan()
-        extra_context['ipk'] = self.ipk_kelulusan()
-
+        # extra_context['durasi'] = self.durasi()
 
         extra_context["pembelajaran"] = self.pembelajaran()
         extra_context['pencarian_kerja'] = self.pencarian_kerja()
+        extra_context['cari_kerja'] = self.cara_cari_kerja()
 
         return super().changelist_view(
             request, extra_context=extra_context
