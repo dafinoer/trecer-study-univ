@@ -10,11 +10,21 @@ var data_pertanyaan_f9 = f9_data();
 
 var data_pertanyaan_10 = f10_data();
 
-console.log(data_pertanyaan_10);
-
 var data_pertanyaan_11 = f11_data();
 
-console.log(data_pertanyaan_11);
+var data_pertanyaan_12 = f12_data();
+
+var data_pertanyaan_13 = f13_data();
+
+var data_pertanyaan_14 = f14_data();
+
+var data_pertanyaan_15 = f15_data();
+
+var data_pertanyaan_16 = f16_data();
+
+var data_pertanyaan_17 = f17_data();
+
+console.log(data_pertanyaan_13);
 
 var surveyJSON = {
     pages: [{
@@ -190,42 +200,93 @@ var surveyJSON = {
                 type: "radiogroup",
                 name: "17",
                 title: "Apa jenis perusahaan/instansi/institusi tempat anda bekerja sekarang?",
-                choices: [], //[{value:"item1", text="ya"}, {value:"item2", text:"tidak"}]
+                choices: data_pertanyaan_11, //[{value:"item1", text="ya"}, {value:"item2", text:"tidak"}]
             },
-         /*
-         {
-          type: "multipletext",
-          name: "question11",
-          title: "Kira-kira berapa pendapat anda setiap bulannya?",
-          items: [
-           {
-            name: "text1"
-           },
-           {
-            name: "text2"
-           }
-          ]
-         },
-         {
-          type: "matrix",
-          name: "question12",
-          title: "Seberapa erat hubungan antara bidang studi dengan pekerjaan anda saat ini?",
-          columns: [
-           "Column 1",
-           "Column 2",
-           "Column 3"
-          ],
-          rows: [
-           "Row 1",
-           "Row 2"
-          ]
-         }
-         */
+            {
+                type: "multipletext",
+                name: "18",
+                title: "Kira-kira berapa pendapat anda setiap bulannya?",
+                items: data_pertanyaan_12    
+            },
+            {
+                type: "matrixdropdown",
+                name: "19",
+                title: "Seberapa erat hubungan antara bidang studi dengan pekerjaan anda saat ini?",
+                columns: [
+                    {
+                        name: "Column 1"
+                    }
+                ],
+                choices: [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ],
+                rows: data_pertanyaan_13
+            }
+        ]
+       },
+       {
+        name: "page5",
+        elements: [
+            {
+                type: "radiogroup",
+                name: "20",
+                title: "Tingkat pendidikan apa yang tepat/sesuai dengan pendidikan anda, mengapa anda mengambilnya?",
+                choices: data_pertanyaan_14 //value text
+            },
+            
+            {
+                type: "checkbox",
+                name: "21",
+                title: "Jika menurut anda pekerjaan anda saat ini tidak sesuai dengan pendidikan anda, mengapa anda mengambilnya?",
+                choices: data_pertanyaan_15 //
+            },
+            {
+                type: "matrixdropdown",
+                name: "22",
+                title: "Pada saat lulus, pada tingkat mana kompetensi dibawah ini anda kuasi",
+                columns: [
+                    {
+                        name: "Column 1"
+                    }
+                ],
+                choices: [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ],
+                rows: data_pertanyaan_16 // value texxt
+            },
+            {
+                type: "matrixdropdown",
+                name: "23",
+                title: "Pada saat lulus, bagaimana kontribusi pergruan tinggi dalam hal kompetensi di bawah ini?",
+                columns: [
+                    {
+                        name: "Column 1"
+                    }
+                ],
+                choices: [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ],
+                rows: data_pertanyaan_17 // value texxt
+            },
+
         ]
        },
     ],
     pagePrevText: "back",
     pageNextText: "next",
+    showProgressBar:"bottom",
     completeText: "done"
 }
 

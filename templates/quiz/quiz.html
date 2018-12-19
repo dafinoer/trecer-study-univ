@@ -24,7 +24,6 @@
 
 {% csrf_token %}
 <script src="https://surveyjs.azureedge.net/1.0.56/survey.jquery.min.js"></script>
-<!-- <script src="{% static 'quisioner/js/quisioner.js'%}"></script> -->
 
 <script>
 
@@ -131,12 +130,129 @@
                 data_lst.push(dict_data);
             }
         }
-
         return data_lst
     }
 
+    function f12_data(){
+        
+        var data_lst = [];
+
+        for (var i = 0; i < data_full_server.length; i++){
+
+            if (data_full_server[i]['id_kategori'] === 18){
+                var dict_data = new Object();
+
+                dict_data.name = String(data_full_server[i]['value']);
+                dict_data.title = data_full_server[i]['text'];
+
+                data_lst.push(dict_data);
+            }
+        }
+
+        return data_lst;
+    }
 
 
+    function f13_data(){
+
+        var data_list = [];
+
+        for (var i = 0; i < data_full_server.length; i++){
+
+            if (data_full_server[i]['id_kategori'] === 19){
+
+                var dict_data = new Object();
+
+                dict_data.value = String(data_full_server[i]['value']);
+                dict_data.text = data_full_server[i]['text'];
+
+                data_list.push(dict_data)
+            }
+        }
+        return data_list;
+    }
+
+
+    function f14_data(){
+
+        var data_list =[];
+
+        for (var i = 0; i < data_full_server.length; i++){
+
+
+            if (data_full_server[i]['id_kategori'] === 20){
+                var dict_data = new Object()
+
+                dict_data.value = String(data_full_server[i]['value']);
+                dict_data.text = data_full_server[i]['text'];
+
+                data_list.push(dict_data);
+            }
+        }
+        
+        return data_list
+    }
+
+
+    function f15_data(){
+        
+        var dst_list = [];
+
+        for (var i = 0; i < data_full_server.length; i++){
+
+            if (data_full_server[i]['id_kategori'] === 21){
+                var dict_data = new Object();
+
+                dict_data.value = String(data_full_server[i]['value']);
+                dict_data.text = data_full_server[i]['text'];
+
+                dst_list.push(dict_data);
+            }
+        }
+
+        return dst_list;
+    }
+
+    function f16_data(){
+        
+        var data_list = [];
+
+        for (var i =0; i < data_full_server.length; i++){
+
+            if (data_full_server[i]['id_kategori'] === 22){
+                var dict_data = new Object();
+
+                dict_data.value = String(data_full_server[i]['value']);
+                dict_data.text = data_full_server[i]['text'];
+
+                data_list.push(dict_data);
+            }
+        }
+
+        return data_list;
+    }
+
+
+    function f17_data(){
+        
+        var data_list = [];
+
+        for (var j = 0; j < data_full_server.length; j++){
+
+            if(data_full_server[j]['id_kategori'] === 23){
+                var dict_data = new Object();
+
+                dict_data.value=String(data_full_server[j]['value']);
+                dict_data.text = data_full_server[j]['text']
+
+                data_list.push(dict_data);
+            }
+            
+        }
+
+        return data_list;
+
+    }
 </script>
 
 <script src="{% static 'quisioner/js/newbase.js'%}"></script>
