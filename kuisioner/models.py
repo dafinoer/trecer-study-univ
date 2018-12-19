@@ -32,6 +32,9 @@ class Question(models.Model):
     class Meta:
         db_table = 'question'
 
+    def user_uuid(self):
+        return self.question.__str__()
+
     def __str__(self):
         return str(self.question)
 

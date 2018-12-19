@@ -54,8 +54,25 @@ class Quizioner(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
 
+        kategori_f6 = Question.objects.all()
+
+        dst_lst = []
+
+        for data in kategori_f6:
+            val_dict = {}
+
+            val_dict['id_kategori']=data.ketegories_id
+            val_dict['value'] = data.id
+            val_dict['text'] = data.jawaban
+            dst_lst.append(val_dict)
+        
+        to_json = json.dumps(dst_lst)
+
+        print(to_json)
+
         cntx = {
             "title": "quiz",
+            "question_data":to_json
         }
 
         return render(self.request, template_name='quiz/quiz.html', context=cntx)
@@ -117,12 +134,27 @@ class Quizioner(LoginRequiredMixin, View):
 
                         get_id_kategori = Kategori.objects.get(id=int(key))
 
-                        try:
+                        # try:
 
-                            survey = Survey(value=int(data), question=get_id, kategories=get_id_kategori)
-                            survey.save()
-                        except Exception as identifier:
-                            print(identifier)
+                        #     survey = Survey(value=int(data), question=get_id, kategories=get_id_kategori)
+                        #     survey.save()
+                        # except Exception as identifier:
+                        #     print(identifier)
+
+                elif key == '11':
+                    print('ini value ketiga valuenya > ',value)
+
+                    try:
+                        get_id_kategori = Kategori.objects.get(id=int(key))
+
+                        get_id_question = Question.objects.get(ketegories_id=get_id_kategori.id)
+
+                        survey = Survey(value=value, question=get_id_question, kategories=get_id_kategori)
+
+                        survey.save()
+
+                    except Exception as e:
+                        print(e)
 
                 else:
                     print('no data')

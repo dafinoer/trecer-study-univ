@@ -16,16 +16,21 @@ logger = logging.getLogger(__name__)
 # Register your models here.
 @admin.register(Kategori)
 class KategoriAdmin(admin.ModelAdmin):
-    list_display = ('tanya', 'crated_at')
+    list_display = ('id', 'tanya', 'crated_at')
 
 # admin.site.register(Kategori, KategoriAdmin)
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'get_kuisioner','jawaban', 'crated_at')
+    list_display = ('id', 'get_kuisioner','jawaban', 'crated_at', 'kategori_id')
+
+    search_fields = ('id', 'jawaban', 'ketegories__id')
 
     def get_kuisioner(self, obj):
         return obj.ketegories.tanya
+    
+    def kategori_id(self, obj):
+        return obj.ketegories.id
 
 @admin.register(Survey)
 class SurveyAdmin(admin.ModelAdmin):
@@ -121,7 +126,6 @@ class SurveyAdmin(admin.ModelAdmin):
             
             data_lst.append(value_dict)
 
-        # print('print data ',data_lst)
 
         return data_lst
     

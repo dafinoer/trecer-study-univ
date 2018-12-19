@@ -1,5 +1,21 @@
 Survey.Survey.cssType = "bootstrap";
 
+var k = f3_data();
+
+var data_pertanyaan_f7 = f7_data();
+
+var data_pertanyaan_f8 = f8_data();
+
+var data_pertanyaan_f9 = f9_data();
+
+var data_pertanyaan_10 = f10_data();
+
+console.log(data_pertanyaan_10);
+
+var data_pertanyaan_11 = f11_data();
+
+console.log(data_pertanyaan_11);
+
 var surveyJSON = {
     pages: [{
         name: "page1",
@@ -8,7 +24,7 @@ var surveyJSON = {
             name: "9",
             title: "Kapan anda mulai mencari pekerjaan ? ",
             enableIf: "{2321} ==== /^\\d+$/",
-            isRequired: true,
+            //isRequired: true,
             items: [{
                 name: "48",
                 title: "bulan sebelum lulus"
@@ -21,11 +37,11 @@ var surveyJSON = {
             type: "matrixdropdown",
             name: "8",
             title: "Menurut anda seberapa besar penekanan pada metode pembelajaran dibawah ini dilaksanakan di program studi anda?",
-            isRequired: true,
+            //isRequired: true,
             columns: [{
                 name: "rating",
                 title: "rating",
-                isRequired: true
+                // isRequired: true
             }],
             choices: [1, 2, 3, 4, 5],
             rows: [{
@@ -117,7 +133,100 @@ var surveyJSON = {
                     }   
             ]
         }]
-    }]
+    },
+    {
+        name: "page2",
+        elements: [
+         {
+          type: "text",
+          name: "question2",
+          title: "Berapa perusahaan/instansi /institusi yang sudah anda lamar (lewat surat atau e-mail) sebelum anda memperoleh pekerjaan pertama?",
+          valueName: "11",
+          //isRequired: true
+         },
+         {
+            type: "multipletext",
+            name: "12",
+            title: "Berapa bulan waktu yang dihabiskan (sebelum dan sesudah kelulusan) untuk memperoleh pekerjaan pertama?",
+            //isRequired:true,
+            items: k
+         },
+         {
+            type: "multipletext",
+            name: "13",
+            title: "Berapa banyak perusahaan/instansi/institusi yang merespons/mengundang lamaran anda?",
+            //isRequired: true,
+            items: data_pertanyaan_f7 //[{name:"text2", title:"lorem ipsum"}]
+         },
+        ]
+    },
+    {
+        name: "page3",
+        elements: [
+            {
+                type: "radiogroup",
+                name: "14",
+                title: "Apakah anda bekerja saat ini (termasuk kerja sambilan dan wirausaha)?",
+                choices: data_pertanyaan_f8  //[{value:"item1", text="ya"}, {value:"item2", text:"tidak"}]
+            },
+            {
+                type: "checkbox",
+                name: "15",
+                title: "Bagaimana anda menggambarkan situasi anda saat ini?",
+                choices: data_pertanyaan_f9 //[{value: "20", text: "lorem"}, {value: "90", text: "ipsum"}]
+            },
+            {
+                type: "radiogroup",
+                name: "16",
+                title: "Apakah anda aktif mencari pekerjaan dalam 4 minggu terakhir?",
+                choices: data_pertanyaan_10 //[{value:"item1", text="ya"}, {value:"item2", text:"tidak"}]
+            }
+        ]
+       },
+       {
+        name: "page4",
+        elements: [
+            {
+                type: "radiogroup",
+                name: "17",
+                title: "Apa jenis perusahaan/instansi/institusi tempat anda bekerja sekarang?",
+                choices: [], //[{value:"item1", text="ya"}, {value:"item2", text:"tidak"}]
+            },
+         /*
+         {
+          type: "multipletext",
+          name: "question11",
+          title: "Kira-kira berapa pendapat anda setiap bulannya?",
+          items: [
+           {
+            name: "text1"
+           },
+           {
+            name: "text2"
+           }
+          ]
+         },
+         {
+          type: "matrix",
+          name: "question12",
+          title: "Seberapa erat hubungan antara bidang studi dengan pekerjaan anda saat ini?",
+          columns: [
+           "Column 1",
+           "Column 2",
+           "Column 3"
+          ],
+          rows: [
+           "Row 1",
+           "Row 2"
+          ]
+         }
+         */
+        ]
+       },
+    ],
+    pagePrevText: "back",
+    pageNextText: "next",
+    completeText: "done"
 }
 
 var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
