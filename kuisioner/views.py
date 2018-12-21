@@ -15,6 +15,8 @@ from .forms import MahasiswaForm
 
 from .models import Kategori, Question, Survey
 
+from .utils import Tool
+
 logger = logging.getLogger(__name__)
 
 class NimLogin(View):
@@ -95,69 +97,78 @@ class Quizioner(LoginRequiredMixin, View):
                     for k, v in value.items():
 
                         value_data = v['rating']
-                        
-                        get_id = Question.objects.get(id=int(k))
 
-                        get_id_kategori = Kategori.objects.get(id=int(key))
+                        tool = Tool(value_data, k, key)
 
-                        # survey = Survey(value=value_data, question=get_id, kategories=get_id_kategori)
-
-                        # survey.save()
+                        tool.save_database()
+                    
+                    del k
+                    del v
 
                 elif key == '9':
                     print('ini value kedua valuenya > ',value)
                     
                     for k, v in value.items():
-                        print(k)
-                        print(v)
 
-                        get_id = Question.objects.get(id=int(k))
+                        value_data = int(v)
 
-                        get_id_kategori = Kategori.objects.get(id=int(key))
+                        tool = Tool(value_data, k, key)
 
-                        # try:
+                        tool.save_database()
 
-                        #     survey = Survey(value=int(v), question=get_id, kategories=get_id_kategori)
-                        #     survey.save()
-
-                        # except ValueError as e:
-                        #     print(e)
-
+                    del k
+                    del v
 
                 elif key == '10':
                     print('ini value ketiga valuenya > ',value)
 
                     for data in value:
-                        print(type(data))
 
-                        get_id = Question.objects.get(id=int(data))
+                        value_data = int(data)
 
-                        get_id_kategori = Kategori.objects.get(id=int(key))
+                        tool = Tool(value_data, data, key)
 
-                        # try:
-
-                        #     survey = Survey(value=int(data), question=get_id, kategories=get_id_kategori)
-                        #     survey.save()
-                        # except Exception as identifier:
-                        #     print(identifier)
 
                 elif key == '11':
-                    print('ini value ketiga valuenya > ',value)
+                    print('ini value ketiga valuenya kategori 11 > ',value)
 
-                    try:
-                        get_id_kategori = Kategori.objects.get(id=int(key))
+                    get_id_kategori = Question.objects.get(ketegories_id=int(key))
 
-                        get_id_question = Question.objects.get(ketegories_id=get_id_kategori.id)
+                    if value.isdigit():
+                        tool = Tool(value, get_id_kategori.id, key)
+                        tool.save_database()
+                    
+                    else:
+                        print('not in format')
 
-                        survey = Survey(value=value, question=get_id_question, kategories=get_id_kategori)
+                
+                elif key == '12':
+                    print('ini value kategori 12 > ', value)
 
-                        survey.save()
+                    for data_key, data_value in value.items():
+                        print(data_value)
 
-                    except Exception as e:
-                        print(e)
+                        # value_data = int(v)
+
+                        tool = Tool(data_value, data_key, key)
+
+                        tool.save_database()
+                    
+                    del data_key
+                    del data_value
+                
+                elif key == '13':
+                    print('ini value kategori 13 >', value)
+
+                    for data_key_13, data_value_13 in value.items():
+
+                        tool = Tool(data_value_13, data_key_13, key)
+                        
+                        tool.save_database()
 
                 else:
                     print('no data')
+                
                 
 
 

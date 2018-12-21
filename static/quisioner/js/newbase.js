@@ -2,6 +2,8 @@ Survey.Survey.cssType = "bootstrap";
 
 var k = f3_data();
 
+console.log(f3_data())
+
 var data_pertanyaan_f7 = f7_data();
 
 var data_pertanyaan_f8 = f8_data();
@@ -24,7 +26,6 @@ var data_pertanyaan_16 = f16_data();
 
 var data_pertanyaan_17 = f17_data();
 
-console.log(data_pertanyaan_13);
 
 var surveyJSON = {
     pages: [{
@@ -34,7 +35,7 @@ var surveyJSON = {
             name: "9",
             title: "Kapan anda mulai mencari pekerjaan ? ",
             enableIf: "{2321} ==== /^\\d+$/",
-            //isRequired: true,
+            isRequired: true,
             items: [{
                 name: "48",
                 title: "bulan sebelum lulus"
@@ -47,11 +48,11 @@ var surveyJSON = {
             type: "matrixdropdown",
             name: "8",
             title: "Menurut anda seberapa besar penekanan pada metode pembelajaran dibawah ini dilaksanakan di program studi anda?",
-            //isRequired: true,
+            isRequired: true,
             columns: [{
                 name: "rating",
                 title: "rating",
-                // isRequired: true
+                isRequired: true
             }],
             choices: [1, 2, 3, 4, 5],
             rows: [{
