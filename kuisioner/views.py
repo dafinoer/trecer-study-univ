@@ -146,13 +146,16 @@ class Quizioner(LoginRequiredMixin, View):
                     print('ini value kategori 12 > ', value)
 
                     for data_key, data_value in value.items():
-                        print(data_value)
 
-                        # value_data = int(v)
+                        check_string = bool(str(data_value), str(data_value).strip())
 
-                        tool = Tool(data_value, data_key, key)
-
-                        tool.save_database()
+                        if check_string:
+                            
+                            print(data_value)
+                            
+                            tool = Tool(data_value, data_key, key)
+                            
+                            tool.save_database()
                     
                     del data_key
                     del data_value
@@ -165,12 +168,102 @@ class Quizioner(LoginRequiredMixin, View):
                         tool = Tool(data_value_13, data_key_13, key)
                         
                         tool.save_database()
+                
+                elif key == '14':
+                    print('ini value kategori 14 > ', value)
+
+                    tool = Tool(value, value, key)
+
+                    tool.save_database()
+                
+                elif key == '15':
+                    print('ini value kategori 15 > ', value)
+
+                    for data_15 in value:
+
+                        tool_15 = Tool(data_15, data_15, key)
+
+                        tool_15.save_database()
+
+                    del data_15
+
+                elif key == '16':
+                    print('ini value kategori 16 >', value)
+
+                    tool_16 = Tool(value, value, key)
+
+                    tool_16.save_database()
+
+                    del tool_16
+                
+                elif key == '17':
+                    print('ini value kategori 17 >', value)
+
+                    tool_17 = Tool(value, value, key)
+
+                    tool_17.save_database()
+
+                elif key == '18':
+                    print('ini value kategori 18', value)
+
+                    for data_key18, data_value18 in value:
+
+                        tool_18 = Tool(data_value18, data_key18, key)
+
+                        tool_18.save_database()
+
+                elif key == '19':
+                    print('ini value kategori 19 ', value)
+
+                    value_data_19 = value['76']['Column 1']
+                    value_key_question = list(value.keys())[0]
+
+                    tool_19 = Tool(value_data_19, value_key_question, key)
+
+                    tool_19.save_database()
+                
+                elif key == '20':
+
+                    print('ini value kategori 20 > ', value)
+
+                    tool_20 = Tool(value, value, key)
+
+                    tool_20.save_database()
+
+                elif key == '21':
+
+                    print('ini value kategori 21 ', value)
+
+                    for data_val_21 in value:
+
+                        tool_21 = Tool(data_val_21, data_val_21, key)
+
+                        tool_21.save_database()
+                
+                elif key == '22':
+                    print('ini value kategori 22 ', value)
+
+                    for data_key_22, data_value_22 in value.items():
+
+                        value_data_key_22 = str(data_value_22['Column 1'])
+
+                        tool_22 = Tool(value_data_key_22, data_key_22, key)
+
+                        tool_22.save_database()
+
+                elif key == '23':
+                    print('ini value kategori 23', value)
+
+                    for data_key_23, data_value_23 in value.items():
+
+                        value_data_key_23 = str(data_value_23['Column 1'])
+
+                        tool_23 = Tool(value_data_key_23, data_key_23, key)
+
+                        tool_23.save_database()
 
                 else:
                     print('no data')
-                
-                
-
 
         except Exception as e:
             print(e)
