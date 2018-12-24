@@ -71,16 +71,6 @@ class SurveyAdmin(admin.ModelAdmin):
         
         return row
     
-    # def durasi(self):
-    #     with connection.cursor() as cursor:
-    #        cursor.execute(self.query_sql(1))
-    #        data = cursor.fetchall()
-
-    #        print(data)
-
-    #     return data
-    
-    
     def pembelajaran(self):
 
         get_question_id = Question.objects.filter(ketegories_id=8)
@@ -189,10 +179,382 @@ class SurveyAdmin(admin.ModelAdmin):
 
             data_dst.append(value_dict)
 
-        print(data_dst)
-
         return data_dst
 
+    def pertanyaan_f6(self):
+
+        question_id = Question.objects.get(ketegories_id=11)
+
+        value_dic = {}
+
+        try:
+
+            data_survey = Survey.objects.filter(question_id=question_id.id)
+
+            collection_value = [int(data.value) for data in data_survey]
+
+            print(collection_value)
+
+            total_avg = sum(collection_value) / len(collection_value)
+
+            value_dic['jawaban'] = question_id.jawaban
+            value_dic['average'] = total_avg
+
+
+        except Exception as identifier:
+
+            print(identifier)
+
+        print(value_dic)
+
+        return value_dic
+    
+    def pertanyaan_f7(self):
+
+        get_question = Question.objects.filter(ketegories_id=12)
+
+        data_lst = []
+
+        for k in get_question:
+
+            value_dict ={}
+
+            get_average = 0
+
+            survey = Survey.objects.filter(question_id=k.id)
+
+            data_value = [int(data.value) for data in survey.jawaban]
+
+            total = sum(data_value) / len(data_value)
+
+
+            value_dict['jawaban'] = k.jawaban
+            value_dict['average'] = total
+
+            data_lst.append(value_dict)
+        
+        return data_lst
+
+    def pertanyaa_f8(self):
+        
+        question = QUestion.objects.filter(ketegories_id=13)
+
+        data_lst = []
+
+        for data in question:
+
+            value_dict = {}
+
+            get_avg = 0
+
+            survey = Survey.objects.filter(question_id=data.id)
+
+            d_value = [data for data in survey]
+
+            total_f8 = sum(d_value) / len(d_value)
+
+            value_dict['jawaban'] = data.jawaban
+            value_dict['avg'] = total_f8
+            
+            data_lst.append(value_dict)
+        
+        return data_lst
+    
+    def pertanyaa_f9(self):
+
+        question = Question.objects.filter(ketegories_id=14)
+
+        data_list = []
+
+        for data in question:
+            
+            value_dict = {}
+
+            survey = Survey.objects.filter(question_id=data.id).count()
+
+            value_dict['jawaban'] = data.jawaban
+            value_dict['total'] = survey
+
+            data_list.append(value_dict)
+        
+        return data_list
+    
+    def pertanyaan_10(self):
+
+        question = Question.objects.filter(kategories_id=15)
+
+        data_lst = []
+
+        for data in question:
+            value_dict = {}
+
+            survey = Survey.objects.filter(question_id=data.id).count()
+
+            value_dict['jawaban'] = data.jawaban
+            value_dict['total'] = survey
+
+            data_lst.append(value_dict)
+        
+        print(data_lst)
+
+        return data_lst
+
+    
+    def pertanyaan_f11(self):
+        print('16')
+
+        question = Question.objects.filter(kategories_id=16)
+
+        data_lst = []
+
+        for data in question:
+            value_dict = {}
+
+            survey = Survey.objects.filter(question_id=data.id).count()
+
+            value_dict['jawaban'] = data.jawaban
+            value_dict['total'] = survey
+
+            data_lst.append(value_dict)
+
+        return data_lst
+    
+    def pertanyaan_f12(self):
+        print('17')
+
+        question = Question.objects.filter(kategories_id=17)
+
+
+        data_lst = []
+
+        for data in question:
+            value_dict = {}
+
+            survey = Survey.objects.filter(question_id=data.id).count()
+            value_dict['jawaban'] = data.jawaban
+            value_dict['total'] = survey
+
+            data_lst.append(value_dict)
+
+        return data_lst
+    
+    def pertanyaan_f13(self):
+        print('18') 
+
+        question = Question.objects.filter(kategories_id=18)
+
+        data_lst = []
+
+        for data in question:
+            value_dict = {}
+
+            survey = Survey.objects.filter(question_id=data.id)
+            get_value = [int(k.value) for k in survey]
+
+            tot = sum(get_value) / len(get_value)
+
+            value_dict['jawaban'] = data.jawaban
+            value_dict['avg'] = tot
+
+            data_list.append(value_dict)
+
+        print(data_lst)
+        
+        return data_lst
+    
+    def pertanyaan_f14(self):
+        print('19')
+
+        question = Question.objects.filter(kategories_id=19)
+
+        data_list_value = []
+
+        for data in question:
+            value_dict = {}
+            
+            sangat_buruk_1 = 0
+            buruk_2 = 0
+            cukup_3 = 0
+            baik_4 = 0
+            sangat_baik = 0
+
+
+            try:
+                
+                query_get_jumlah=Survey.objects.values('value').annotate(
+                type_count=Count('value')
+                ).filter(question_id=data.id).order_by('-type_count')
+
+                for data_value in query_get_jumlah:
+                    if data_value['value'] == '5':
+                        sangat_baik = data_value['type_count']
+                    elif data_value['value'] == '4':
+                        baik_4 = data_value['type_count']
+                    elif data_value['value'] == '3':
+                        cukup_3 = data_value['type_count']
+                    elif data_value['value'] == '2':
+                        buruk_2 = data_value['type_count']
+                    elif data_value['value'] == '1':
+                        sangat_buruk_1 = data_value['type_count']
+                    else:
+                        print('not found')
+                
+                value_dict["tanya"]=value_id.jawaban
+                value_dict["sangat_buruk"] = sangat_buruk_1
+                value_dict["buruk"] = buruk_2
+                value_dict["cukup"] = cukup_3
+                value_dict["baik"] = baik_4
+                value_dict["sangat_baik"] = sangat_baik
+
+                data_list_value.append(value_dict)
+
+            except Exception as e:
+                print(e)
+
+        return data_list_value
+    
+    def pertanyaan_f15(self):
+        print('20')
+
+        question = Question.objects.filter(kategories_id=20)
+
+        data_lst = []
+
+        for k in question:
+            value_dict = {}
+
+            survey = Survey.objects.filter(question_id=k.id).count()
+
+            value_dict['jawaban'] = k.jawaban
+            value_dict['total'] = survey
+
+            data_lst.append(value_dict)
+
+
+        return data_lst
+    
+    def pertanyaan_f16(self):
+        print('21')
+
+        question = Question,objects.filter(kategories_id=21)
+
+        data_list_value = []
+
+        for k in question:
+            value_dict = {}
+
+            survey = Survey.objects.filter(question_id=k.id).count()
+
+            value_dict['jawaban'] = k.jawaban
+            value_dict['total'] = survey
+
+            data_list_value.append(value_dict)
+
+        return data_list_value
+    
+    def pertanyaan_f17(self):
+        print('22')
+
+        question = Question.objects.filter(kategories_id=22)
+
+        list_data = []
+
+        for value_17 in question:
+
+            value_dictionary = {}
+            
+            sangat_baik_data = 0
+            baik_data = 0
+            cukup_data= 0
+            buruk_data= 0
+            sangat_buruk_data = 0
+ 
+            try:
+                survey = Survey.objects.value('value').annotate(
+                    type_count=Count('value')
+                    ).filter(question_id=value_17.id).order_by('-type_count')
+                
+                for s in survey:
+                    if s['value'] == 5:
+                        sangat_baik_data = s['type_count']
+                    elif s['value'] == 4:
+                        baik_data = s['type_count']
+                    elif s['value'] == 3:
+                        cukup_data = s['type_count']
+                    elif s['value'] == 2:
+                        buruk_data = s['type_count']
+                    elif s['value'] == 1:
+                        sangat_buruk_data = s['type_count']
+                    else:
+                        print(0)
+                
+                value_dictionary['jawaban'] = value_17.jawaban
+                value_dictionary['sangat_buruk']= sangat_buruk_data
+                value_dictionary['buruk'] = buruk_data
+                value_dictionary['cukup'] = cukup_data
+                value_dictionary['baik'] = baik_data
+                value_dictionary['sangat_baik'] = sangat_baik_data
+
+                list_data.append(value_dictionary)
+
+            except Exception as identifier:
+                print(identifier)
+
+        return list_data
+    
+    def pertanyaa_f18(self):
+        print('23')
+
+
+        question = Question.objects.filter(kategories_id=23)
+
+        list_value = []
+
+        for data in question:
+
+            value_dict = {}
+            
+            sangat_baik_23 = 0
+            baik_23 = 0
+            cukup_23 = 0
+            buruk_23 =0
+            sangat_buruk_23 = 0
+
+            try:
+                survey = Survey.objects.value('value').annotate(
+                    type_count=Count('value')
+                ).filter(question_id=data.id).order_by('-type_count')
+
+                for l in survey:
+
+                    if l['value'] == 5:
+                        sangat_baik_23 = l['type_count']
+                    elif l['value'] == 4:
+                        baik_23 = l['type_count']
+                    elif l['value'] == 3:
+                        cukup_23 = l['type_count']
+                    elif l['value'] == 2:
+                        buruk_23 = l['type_count']
+                    elif l['value'] == 1:
+                        sangat_buruk_23 = l['type_count']
+                    else:
+                        print(0)
+
+                value_dict['jawaban'] = data.jawaban
+                value_dict['sangat_baik'] = sangat_baik_23
+                value_dict['baik'] = baik_23
+                value_dict['cukup'] = cukup_23
+                value_dict['buruk'] = buruk_23
+                value_dict['sangat_buruk']= sangat_buruk_23
+
+                list_value[value_dict]
+
+            except Exception as identifier:
+                print(identifier)
+
+        print(list_value)
+
+        return list_value
 
     def changelist_view(self, request, extra_context=None):
         extra_context = extra_context or {}
@@ -202,6 +564,7 @@ class SurveyAdmin(admin.ModelAdmin):
         extra_context["pembelajaran"] = self.pembelajaran()
         extra_context['pencarian_kerja'] = self.pencarian_kerja()
         extra_context['cari_kerja'] = self.cara_cari_kerja()
+        extra_context['pertanyaan_f8'] = self.pertanyaan_f6()
 
         return super().changelist_view(
             request, extra_context=extra_context

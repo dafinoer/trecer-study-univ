@@ -62,11 +62,7 @@
                             <a href="#">jawaban</a>
                         </div>
                     </th>
-                    <th>
-                        <div class="text">
-                            <a href="#">total</a>
-                        </div>
-                    </th>
+        
                 </tr>
             </thead>
 
@@ -170,6 +166,7 @@
         </table>
     </div>
 
+    <br>
     <div class="result">
         <table>
             <thead>
@@ -192,6 +189,30 @@
             </tbody>
         </table>
     </div>
+
+    <br>
+
+    <div class="result">
+        <table>
+            <thead>
+                <tr>
+                    <th><div class="text"><a href="#">Value</a></div></th>
+                    <th><div class="text"><a href="#">Total</a></div></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                
+                <tr>
+                        {% for data, value in pertanyaan_f8.items %}
+                    <td>{{value}}</td>
+                    {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+   
 
 {% endblock %}
 

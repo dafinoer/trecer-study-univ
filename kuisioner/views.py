@@ -268,18 +268,6 @@ class Quizioner(LoginRequiredMixin, View):
         except Exception as e:
             print(e)
         
-        # try:
-        #     for key, value in to_sjson.items():
-
-        #         get_id_question = Question.objects.get(id=int(value))
-
-        #         data = Survey(value=key, question=get_id_question)
-
-        #         data.save()
-
-        # except Exception as e:
-        #     print(e)
-
         
         get_data = {
             'is_taken': "succes"
