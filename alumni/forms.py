@@ -5,7 +5,7 @@ from django.contrib.auth.hashers import check_password
 
 class MahasiswaForm(forms.Form):
 
-    nim = forms.CharField(label='Nim', max_length=12, required=True,
+    nim = forms.CharField(label='Nim', max_length=12,
         widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Masukan Nim'})
     )
     password = forms.CharField(widget=forms.PasswordInput(attrs={

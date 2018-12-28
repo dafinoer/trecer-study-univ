@@ -87,6 +87,8 @@ class Quizioner(LoginRequiredMixin, View):
 
         to_sjson = json.loads(k)
 
+        print('this is json > ',to_sjson)
+
         try:
 
             for key, value in to_sjson.items():
@@ -128,35 +130,34 @@ class Quizioner(LoginRequiredMixin, View):
 
                         tool = Tool(value_data, data, key)
 
+                        tool.save_database()
+
 
                 elif key == '11':
                     print('ini value ketiga valuenya kategori 11 > ',value)
 
                     get_id_kategori = Question.objects.get(ketegories_id=int(key))
-
-                    if value.isdigit():
-                        tool = Tool(value, get_id_kategori.id, key)
-                        tool.save_database()
                     
-                    else:
-                        print('not in format')
+                    tool = Tool(value, get_id_kategori.id, key)
 
+                    tool.save_database()
                 
                 elif key == '12':
                     print('ini value kategori 12 > ', value)
 
                     for data_key, data_value in value.items():
 
-                        check_string = bool(str(data_value), str(data_value).strip())
-
-                        if check_string:
-                            
-                            print(data_value)
-                            
+                        try:
                             tool = Tool(data_value, data_key, key)
                             
                             tool.save_database()
-                    
+
+                            print('12 succes save')
+
+                        except Exception as e:
+                            print(e)
+
+                        
                     del data_key
                     del data_value
                 
@@ -206,9 +207,19 @@ class Quizioner(LoginRequiredMixin, View):
                 elif key == '18':
                     print('ini value kategori 18', value)
 
-                    for data_key18, data_value18 in value:
+                    for data_key18, data_value18 in value.items():
 
-                        tool_18 = Tool(data_value18, data_key18, key)
+                        try:
+                            tool_18 = Tool(data_value18, data_key18, key)
+                            tool_18.save_database()
+
+                            print('18 succes')
+
+                        except Exception as e:
+
+                            print(e)
+
+                        
 
                         tool_18.save_database()
 
@@ -266,7 +277,7 @@ class Quizioner(LoginRequiredMixin, View):
                     print('no data')
 
         except Exception as e:
-            print(e)
+            print('Erorr > ', e)
         
         
         get_data = {

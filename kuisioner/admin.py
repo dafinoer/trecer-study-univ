@@ -42,7 +42,7 @@ class SurveyAdmin(admin.ModelAdmin):
         js = (
                 'admin/js/Chart.js',
                 'admin/js/Chart.min.js', 
-                'admin/js/chart_bar.js',
+                'admin/js/new_chart.js',
             )
 
     def survey_jawaban(self):
@@ -116,7 +116,7 @@ class SurveyAdmin(admin.ModelAdmin):
             
             data_lst.append(value_dict)
 
-
+        print('8 >',data_lst)
         return data_lst
     
     def pencarian_kerja(self):
@@ -131,17 +131,25 @@ class SurveyAdmin(admin.ModelAdmin):
 
             get_average = 0
 
-            survey_bulan = Survey.objects.filter(question_id=data.id)
+            calculate_avg = 0
 
-            data_avg =[int(data.value) for data in survey_bulan]
+            data_avg = []
 
-            calculate_avg = collections.Counter(data_avg)
+            try:
+                survey_bulan = Survey.objects.filter(question_id=data.id)
+                
+                data_avg =[int(data.value) for data in survey_bulan]
+                
+                calculate_avg = collections.Counter(data_avg)
 
-            for k in data_avg:
-                get_average +=k
+                calculate_avg = get_average / len(data_avg)
 
+                for k in data_avg:
+                    get_average +=k
 
-            calculate_avg = get_average / len(data_avg)
+            except Exception as e:
+                print(e)
+
 
 
             value_dict['jawaban'] = data.jawaban
@@ -150,6 +158,7 @@ class SurveyAdmin(admin.ModelAdmin):
             
             data_lst.append(value_dict)
 
+        print('9 > ', data_lst)
 
         return data_lst
     
@@ -179,6 +188,7 @@ class SurveyAdmin(admin.ModelAdmin):
 
             data_dst.append(value_dict)
 
+        print('10 > ', data_dst)
         return data_dst
 
     def pertanyaan_f6(self):
@@ -193,8 +203,6 @@ class SurveyAdmin(admin.ModelAdmin):
 
             collection_value = [int(data.value) for data in data_survey]
 
-            print(collection_value)
-
             total_avg = sum(collection_value) / len(collection_value)
 
             value_dic['jawaban'] = question_id.jawaban
@@ -205,7 +213,6 @@ class SurveyAdmin(admin.ModelAdmin):
 
             print(identifier)
 
-        print(value_dic)
 
         return value_dic
     
@@ -221,23 +228,33 @@ class SurveyAdmin(admin.ModelAdmin):
 
             get_average = 0
 
-            survey = Survey.objects.filter(question_id=k.id)
+            data_value = []
 
-            data_value = [int(data.value) for data in survey.jawaban]
+            total = 0
 
-            total = sum(data_value) / len(data_value)
+            try:
+                survey = Survey.objects.filter(question_id=k.id)
 
+                data_value = [int(data.value) for data in survey if len(data.value) != 0]
+
+                total = sum(data_value) / len(data_value)
+
+            except Exception as e:
+                print(e)
+            
 
             value_dict['jawaban'] = k.jawaban
             value_dict['average'] = total
+            value_dict['total_responden'] = len(data_value)
 
             data_lst.append(value_dict)
         
+
         return data_lst
 
     def pertanyaa_f8(self):
         
-        question = QUestion.objects.filter(ketegories_id=13)
+        question = Question.objects.filter(ketegories_id=13)
 
         data_lst = []
 
@@ -247,17 +264,28 @@ class SurveyAdmin(admin.ModelAdmin):
 
             get_avg = 0
 
-            survey = Survey.objects.filter(question_id=data.id)
+            d_value = []
 
-            d_value = [data for data in survey]
+            total_f8 = 0
 
-            total_f8 = sum(d_value) / len(d_value)
+            try:
+                survey = Survey.objects.filter(question_id=data.id)
+
+                d_value = [int(data.value) for data in survey if data.value.isdigit()]
+
+                total_f8 = sum(d_value) / len(d_value)
+
+            except Exception as e:
+                print(e)
+                
 
             value_dict['jawaban'] = data.jawaban
             value_dict['avg'] = total_f8
+            value_dict['total_responden'] = len(d_value)
             
             data_lst.append(value_dict)
         
+
         return data_lst
     
     def pertanyaa_f9(self):
@@ -276,12 +304,15 @@ class SurveyAdmin(admin.ModelAdmin):
             value_dict['total'] = survey
 
             data_list.append(value_dict)
-        
+
+        print('f9', data_list)
+
         return data_list
     
     def pertanyaan_10(self):
 
-        question = Question.objects.filter(kategories_id=15)
+        question = Question.objects.filter(ketegories_id=15)
+        
 
         data_lst = []
 
@@ -295,7 +326,7 @@ class SurveyAdmin(admin.ModelAdmin):
 
             data_lst.append(value_dict)
         
-        print(data_lst)
+
 
         return data_lst
 
@@ -303,7 +334,7 @@ class SurveyAdmin(admin.ModelAdmin):
     def pertanyaan_f11(self):
         print('16')
 
-        question = Question.objects.filter(kategories_id=16)
+        question = Question.objects.filter(ketegories_id=16)
 
         data_lst = []
 
@@ -316,14 +347,15 @@ class SurveyAdmin(admin.ModelAdmin):
             value_dict['total'] = survey
 
             data_lst.append(value_dict)
+
+        print('16 > ', data_lst)
 
         return data_lst
     
     def pertanyaan_f12(self):
         print('17')
 
-        question = Question.objects.filter(kategories_id=17)
-
+        question = Question.objects.filter(ketegories_id=17)
 
         data_lst = []
 
@@ -336,36 +368,44 @@ class SurveyAdmin(admin.ModelAdmin):
 
             data_lst.append(value_dict)
 
+        print('17 > ',data_lst)
+
         return data_lst
     
     def pertanyaan_f13(self):
         print('18') 
 
-        question = Question.objects.filter(kategories_id=18)
+        question = Question.objects.filter(ketegories_id=18)
 
         data_lst = []
+
+        tot = 0
 
         for data in question:
             value_dict = {}
 
-            survey = Survey.objects.filter(question_id=data.id)
-            get_value = [int(k.value) for k in survey]
+            try:
+                survey = Survey.objects.filter(question_id=data.id)
+                get_value = [int(k.value) for k in survey]
 
-            tot = sum(get_value) / len(get_value)
+                tot = sum(get_value)/ len(get_value)
+
+            except Exception as e:
+                print(e)
 
             value_dict['jawaban'] = data.jawaban
+
             value_dict['avg'] = tot
+            data_lst.append(value_dict)          
 
-            data_list.append(value_dict)
-
-        print(data_lst)
+        print('18 > ',data_lst)
         
         return data_lst
     
     def pertanyaan_f14(self):
         print('19')
 
-        question = Question.objects.filter(kategories_id=19)
+        question = Question.objects.filter(ketegories_id=19)
 
         data_list_value = []
 
@@ -399,7 +439,7 @@ class SurveyAdmin(admin.ModelAdmin):
                     else:
                         print('not found')
                 
-                value_dict["tanya"]=value_id.jawaban
+                value_dict["tanya"]=data.jawaban
                 value_dict["sangat_buruk"] = sangat_buruk_1
                 value_dict["buruk"] = buruk_2
                 value_dict["cukup"] = cukup_3
@@ -411,32 +451,38 @@ class SurveyAdmin(admin.ModelAdmin):
             except Exception as e:
                 print(e)
 
+        print('19', data_list_value)
+
         return data_list_value
     
     def pertanyaan_f15(self):
         print('20')
 
-        question = Question.objects.filter(kategories_id=20)
+        question = Question.objects.filter(ketegories_id=20)
 
         data_lst = []
 
-        for k in question:
-            value_dict = {}
+        try:
+            for k in question:
+                value_dict = {}
 
-            survey = Survey.objects.filter(question_id=k.id).count()
+                survey = Survey.objects.filter(question_id=k.id).count()
 
-            value_dict['jawaban'] = k.jawaban
-            value_dict['total'] = survey
+                value_dict['jawaban'] = k.jawaban
+                value_dict['total'] = survey
+                data_lst.append(value_dict)
 
-            data_lst.append(value_dict)
+        except Exception as identifier:
+            print(identifier)
 
+        print('20 >', data_lst)
 
         return data_lst
     
     def pertanyaan_f16(self):
         print('21')
 
-        question = Question,objects.filter(kategories_id=21)
+        question = Question.objects.filter(ketegories_id=21)
 
         data_list_value = []
 
@@ -449,13 +495,15 @@ class SurveyAdmin(admin.ModelAdmin):
             value_dict['total'] = survey
 
             data_list_value.append(value_dict)
+        
+        print('21 > ', data_list_value)
 
         return data_list_value
     
     def pertanyaan_f17(self):
         print('22')
 
-        question = Question.objects.filter(kategories_id=22)
+        question = Question.objects.filter(ketegories_id=22)
 
         list_data = []
 
@@ -473,6 +521,8 @@ class SurveyAdmin(admin.ModelAdmin):
                 survey = Survey.objects.value('value').annotate(
                     type_count=Count('value')
                     ).filter(question_id=value_17.id).order_by('-type_count')
+
+                print(' 22 > survey ', survey)
                 
                 for s in survey:
                     if s['value'] == 5:
@@ -487,26 +537,27 @@ class SurveyAdmin(admin.ModelAdmin):
                         sangat_buruk_data = s['type_count']
                     else:
                         print(0)
-                
-                value_dictionary['jawaban'] = value_17.jawaban
-                value_dictionary['sangat_buruk']= sangat_buruk_data
-                value_dictionary['buruk'] = buruk_data
-                value_dictionary['cukup'] = cukup_data
-                value_dictionary['baik'] = baik_data
-                value_dictionary['sangat_baik'] = sangat_baik_data
-
-                list_data.append(value_dictionary)
-
             except Exception as identifier:
                 print(identifier)
+            
+            value_dictionary['jawaban'] = value_17.jawaban
+            value_dictionary['sangat_buruk']= sangat_buruk_data
+            value_dictionary['buruk'] = buruk_data
+            value_dictionary['cukup'] = cukup_data
+            value_dictionary['baik'] = baik_data
+            value_dictionary['sangat_baik'] = sangat_baik_data
+
+            list_data.append(value_dictionary)
+                
+
+        print('22 > ', list_data)
 
         return list_data
     
     def pertanyaa_f18(self):
         print('23')
 
-
-        question = Question.objects.filter(kategories_id=23)
+        question = Question.objects.filter(ketegories_id=23)
 
         list_value = []
 
@@ -540,17 +591,17 @@ class SurveyAdmin(admin.ModelAdmin):
                     else:
                         print(0)
 
-                value_dict['jawaban'] = data.jawaban
-                value_dict['sangat_baik'] = sangat_baik_23
-                value_dict['baik'] = baik_23
-                value_dict['cukup'] = cukup_23
-                value_dict['buruk'] = buruk_23
-                value_dict['sangat_buruk']= sangat_buruk_23
-
-                list_value[value_dict]
-
             except Exception as identifier:
                 print(identifier)
+            
+            value_dict['jawaban'] = data.jawaban
+            value_dict['sangat_baik'] = sangat_baik_23
+            value_dict['baik'] = baik_23
+            value_dict['cukup'] = cukup_23
+            value_dict['buruk'] = buruk_23
+            value_dict['sangat_buruk']= sangat_buruk_23
+
+            list_value.append(value_dict)
 
         print(list_value)
 
@@ -564,7 +615,20 @@ class SurveyAdmin(admin.ModelAdmin):
         extra_context["pembelajaran"] = self.pembelajaran()
         extra_context['pencarian_kerja'] = self.pencarian_kerja()
         extra_context['cari_kerja'] = self.cara_cari_kerja()
-        extra_context['pertanyaan_f8'] = self.pertanyaan_f6()
+        extra_context['pertanyaan_f6'] = self.pertanyaan_f6()
+        extra_context['pertanyaan_f7'] = self.pertanyaan_f7()
+        extra_context['pertanyaan_f8'] = self.pertanyaa_f8()
+        extra_context['pertanyaa_f9'] = self.pertanyaa_f9()
+        extra_context['pertanyaan_10'] = self.pertanyaan_10()
+        extra_context['pertanyaan_f11'] = self.pertanyaan_f11()
+        extra_context['pertanyaan_f12'] = self.pertanyaan_f12()
+        extra_context['pertanyaan_f13'] = self.pertanyaan_f13()
+        extra_context['pertanyaan_f14'] = self.pertanyaan_f14()
+        extra_context['pertanyaan_f15'] = self.pertanyaan_f15()
+        extra_context['pertanyaan_16'] = self.pertanyaan_f16()
+        extra_context['pertanyaan_f17'] = self.pertanyaan_f17()
+        extra_context['pertanyaa_f18'] = self.pertanyaa_f18()
+        
 
         return super().changelist_view(
             request, extra_context=extra_context

@@ -81,6 +81,7 @@ var surveyJSON = {
             type: "checkbox",
             name: "10",
             title: "Bagaimana anda mencari pekerjaan tersebut?",
+            isRequired: true,
             choices: [
                    {
                     value: "25",
@@ -152,6 +153,8 @@ var surveyJSON = {
           type: "text",
           name: "question2",
           title: "Berapa perusahaan/instansi /institusi yang sudah anda lamar (lewat surat atau e-mail) sebelum anda memperoleh pekerjaan pertama?",
+          inputType:"number",
+          isRequired: true,
           valueName: "11",
           //isRequired: true
          },
@@ -159,6 +162,7 @@ var surveyJSON = {
             type: "multipletext",
             name: "12",
             title: "Berapa bulan waktu yang dihabiskan (sebelum dan sesudah kelulusan) untuk memperoleh pekerjaan pertama?",
+            isRequired: true,
             //isRequired:true,
             items: k
          },
@@ -166,7 +170,7 @@ var surveyJSON = {
             type: "multipletext",
             name: "13",
             title: "Berapa banyak perusahaan/instansi/institusi yang merespons/mengundang lamaran anda?",
-            //isRequired: true,
+            isRequired: true,
             items: data_pertanyaan_f7 //[{name:"text2", title:"lorem ipsum"}]
          },
         ]
@@ -178,18 +182,21 @@ var surveyJSON = {
                 type: "radiogroup",
                 name: "14",
                 title: "Apakah anda bekerja saat ini (termasuk kerja sambilan dan wirausaha)?",
+                isRequired: true,
                 choices: data_pertanyaan_f8  //[{value:"item1", text="ya"}, {value:"item2", text:"tidak"}]
             },
             {
                 type: "checkbox",
                 name: "15",
                 title: "Bagaimana anda menggambarkan situasi anda saat ini?",
+                isRequired: true,
                 choices: data_pertanyaan_f9 //[{value: "20", text: "lorem"}, {value: "90", text: "ipsum"}]
             },
             {
                 type: "radiogroup",
                 name: "16",
                 title: "Apakah anda aktif mencari pekerjaan dalam 4 minggu terakhir?",
+                isRequired: true,
                 choices: data_pertanyaan_10 //[{value:"item1", text="ya"}, {value:"item2", text:"tidak"}]
             }
         ]
@@ -201,18 +208,21 @@ var surveyJSON = {
                 type: "radiogroup",
                 name: "17",
                 title: "Apa jenis perusahaan/instansi/institusi tempat anda bekerja sekarang?",
+                isRequired: true,
                 choices: data_pertanyaan_11, //[{value:"item1", text="ya"}, {value:"item2", text:"tidak"}]
             },
             {
                 type: "multipletext",
                 name: "18",
                 title: "Kira-kira berapa pendapat anda setiap bulannya?",
+                isRequired: true,
                 items: data_pertanyaan_12    
             },
             {
                 type: "matrixdropdown",
                 name: "19",
                 title: "Seberapa erat hubungan antara bidang studi dengan pekerjaan anda saat ini?",
+                isRequired: true,
                 columns: [
                     {
                         name: "Column 1"
@@ -236,6 +246,7 @@ var surveyJSON = {
                 type: "radiogroup",
                 name: "20",
                 title: "Tingkat pendidikan apa yang tepat/sesuai dengan pendidikan anda, mengapa anda mengambilnya?",
+                isRequired: true,
                 choices: data_pertanyaan_14 //value text
             },
             
@@ -243,12 +254,14 @@ var surveyJSON = {
                 type: "checkbox",
                 name: "21",
                 title: "Jika menurut anda pekerjaan anda saat ini tidak sesuai dengan pendidikan anda, mengapa anda mengambilnya?",
+                isRequired: true,
                 choices: data_pertanyaan_15 //
             },
             {
                 type: "matrixdropdown",
                 name: "22",
                 title: "Pada saat lulus, pada tingkat mana kompetensi dibawah ini anda kuasi",
+                isRequired: true,
                 columns: [
                     {
                         name: "Column 1"
@@ -267,6 +280,7 @@ var surveyJSON = {
                 type: "matrixdropdown",
                 name: "23",
                 title: "Pada saat lulus, bagaimana kontribusi pergruan tinggi dalam hal kompetensi di bawah ini?",
+                isRequired: true,
                 columns: [
                     {
                         name: "Column 1"
