@@ -518,22 +518,22 @@ class SurveyAdmin(admin.ModelAdmin):
             sangat_buruk_data = 0
  
             try:
-                survey = Survey.objects.value('value').annotate(
+                survey = Survey.objects.values('value').annotate(
                     type_count=Count('value')
                     ).filter(question_id=value_17.id).order_by('-type_count')
 
                 print(' 22 > survey ', survey)
                 
                 for s in survey:
-                    if s['value'] == 5:
+                    if s['value'] == '5':
                         sangat_baik_data = s['type_count']
-                    elif s['value'] == 4:
+                    elif s['value'] == '4':
                         baik_data = s['type_count']
-                    elif s['value'] == 3:
+                    elif s['value'] == '3':
                         cukup_data = s['type_count']
-                    elif s['value'] == 2:
+                    elif s['value'] == '2':
                         buruk_data = s['type_count']
-                    elif s['value'] == 1:
+                    elif s['value'] == '1':
                         sangat_buruk_data = s['type_count']
                     else:
                         print(0)
@@ -572,21 +572,21 @@ class SurveyAdmin(admin.ModelAdmin):
             sangat_buruk_23 = 0
 
             try:
-                survey = Survey.objects.value('value').annotate(
+                survey = Survey.objects.values('value').annotate(
                     type_count=Count('value')
                 ).filter(question_id=data.id).order_by('-type_count')
 
                 for l in survey:
 
-                    if l['value'] == 5:
+                    if l['value'] == '5':
                         sangat_baik_23 = l['type_count']
-                    elif l['value'] == 4:
+                    elif l['value'] == '4':
                         baik_23 = l['type_count']
-                    elif l['value'] == 3:
+                    elif l['value'] == '3':
                         cukup_23 = l['type_count']
-                    elif l['value'] == 2:
+                    elif l['value'] == '2':
                         buruk_23 = l['type_count']
-                    elif l['value'] == 1:
+                    elif l['value'] == '1':
                         sangat_buruk_23 = l['type_count']
                     else:
                         print(0)

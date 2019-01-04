@@ -38,10 +38,12 @@ var surveyJSON = {
             isRequired: true,
             items: [{
                 name: "48",
-                title: "bulan sebelum lulus"
+                title: "bulan sebelum lulus",
+                inputType:'number',
             }, {
                 name: "49",
-                title: "bulan setelah lulus"
+                title: "bulan setelah lulus",
+                inputType:'number',
             }],
             itemSize: 3
         }, {

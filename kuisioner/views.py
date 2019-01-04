@@ -70,7 +70,6 @@ class Quizioner(LoginRequiredMixin, View):
         
         to_json = json.dumps(dst_lst)
 
-        print(to_json)
 
         cntx = {
             "title": "quiz",
@@ -256,22 +255,38 @@ class Quizioner(LoginRequiredMixin, View):
 
                     for data_key_22, data_value_22 in value.items():
 
-                        value_data_key_22 = str(data_value_22['Column 1'])
+                        print(data_value_22)
 
-                        tool_22 = Tool(value_data_key_22, data_key_22, key)
+                        try:
+                            
+                            value_data_key_22 = data_value_22['Column 1']
+                            
+                            tool_22 = Tool(value_data_key_22, data_key_22, key)
 
-                        tool_22.save_database()
+                            tool_22.save_database()
+
+                        except Exception as e:
+                            print(e)
+
 
                 elif key == '23':
                     print('ini value kategori 23', value)
 
                     for data_key_23, data_value_23 in value.items():
 
-                        value_data_key_23 = str(data_value_23['Column 1'])
 
-                        tool_23 = Tool(value_data_key_23, data_key_23, key)
+                        try:
+                            value_data_key_23 = data_value_23['Column 1']
 
-                        tool_23.save_database()
+                            tool_23 = Tool(value_data_key_23, data_key_23, key)
+
+                            tool_23.save_database()
+
+                        except Exception as e:
+                            
+                            print(e)
+
+                        # tool_23.save_database()
 
                 else:
                     print('no data')

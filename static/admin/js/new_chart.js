@@ -527,6 +527,9 @@ window.onload = function(){
 
     var data_value = [];
 
+
+    console.log(pertanyaan_22())
+
     for (var i = 0; i < pertanyaan_22().length; i++){
         var data_object = new Object();
 
@@ -541,6 +544,8 @@ window.onload = function(){
 
         data_value.push(data_object)
     }
+
+    console.log('tes data 22 ? ',data_value)
 
     var ctx_22 = document.getElementById('chart_line_22');
     var chart = new Chart(ctx_22, {
@@ -557,7 +562,7 @@ window.onload = function(){
         options: option_stack_bar
     });
 
-    console.log(pertanyaan_23());
+    //console.log(pertanyaan_23());
 
     var title_23 = ['sangat buruk', 'buruk', 'cukup', 'baik', 'sangat baik'];
 
