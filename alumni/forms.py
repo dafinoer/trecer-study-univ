@@ -6,10 +6,10 @@ from django.contrib.auth.hashers import check_password
 class MahasiswaForm(forms.Form):
 
     nim = forms.CharField(label='Nim', max_length=12,
-        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Masukan Nim'})
+        widget=forms.TextInput(attrs={'class':'input100', 'placeholder': 'Masukan Nim'})
     )
     password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'form-control',
+        'class': 'input100',
         'placeholder': 'Password'
     }))
 
@@ -32,7 +32,7 @@ class MahasiswaForm(forms.Form):
         else:
 
             nim = Mahasiswa.objects.get(nim=nim_data)
-            user = user = User.objects.get(mahasiswa__nim=nim_data)
+            user = User.objects.get(mahasiswa__nim=nim_data)
 
             pwd_check = check_password(pwd_data, user.password)
 

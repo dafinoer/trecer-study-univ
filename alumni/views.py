@@ -24,11 +24,13 @@ class Home(View):
 
 def login(request):
 
-    form = MahasiswaForm(request.POST)
+    form = MahasiswaForm()
     
     settings = SettingsBackend()
 
     if request.method == 'POST':
+
+        form = MahasiswaForm(request.POST)
 
         if form.is_valid():
             nim_user = form.cleaned_data["nim"]
@@ -45,7 +47,7 @@ def login(request):
         'form': form
     }
     
-    return render(request, template_name='alumni/login.html', context=context)
+    return render(request, template_name='alumni/login_new.html', context=context)
 
 
 def logout_view(request):

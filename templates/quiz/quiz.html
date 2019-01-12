@@ -5,6 +5,7 @@
 {% block header %}
 
 <title>quiz</title>
+<link rel="stylesheet" href="{% static 'user/css/quiz-base.css'%}">
 
 {% endblock %}
 
@@ -12,7 +13,7 @@
 
 
 <div class="container">
-    <h4>{{title}}</h4>
+    <h4 id="text-id_title">{{title}}</h4>
     
     <div id="surveyContainer"></div>
 </div>

@@ -142,7 +142,7 @@ var surveyJSON = {
                     text: "Bekerja di tempat yang sama dengan tempat kerja sesama kuliah"
                    }, 
                    {
-                    value: "item15",
+                    value: "125",
                     text: "Lainnya "
                     }   
             ]

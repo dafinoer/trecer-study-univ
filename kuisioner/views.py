@@ -72,7 +72,7 @@ class Quizioner(LoginRequiredMixin, View):
 
 
         cntx = {
-            "title": "quiz",
+            "title": "Tracer Study",
             "question_data":to_json
         }
 
@@ -121,15 +121,28 @@ class Quizioner(LoginRequiredMixin, View):
                     del v
 
                 elif key == '10':
+                    
                     print('ini value ketiga valuenya > ',value)
 
-                    for data in value:
+                    try:
+                        
+                        for data in value:
+                            
+                            value_data = int(data)
+                            tool = Tool(value_data, data, key)
+                            tool.save_database()
 
-                        value_data = int(data)
+                    except Exception as e:
 
-                        tool = Tool(value_data, data, key)
+                        print(e)
 
-                        tool.save_database()
+                    # for data in value:
+
+                    #     value_data = int(data)
+
+                    #     tool = Tool(value_data, data, key)
+
+                    #     tool.save_database()
 
 
                 elif key == '11':
