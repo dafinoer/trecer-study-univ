@@ -44,7 +44,7 @@ window.onload = function(){
         },
         legend:{
             display:true,
-            fullWidth:false,
+            fullWidth:true,
             position:'bottom'            
         }
     }
@@ -267,7 +267,9 @@ options: {
     scales: {
         yAxes: [{
             ticks: {
-                beginAtZero:true
+                beginAtZero:true,
+                max:100,
+                min:0
             },
             gridLines:{
                 color: "rgba(0, 0, 0, 0)",

@@ -28,11 +28,13 @@ window.onload = function(){
                     display:false,
                     color: "#fff",
                     zeroLineColor: "#fff",
-                    zeroLineWidth: 0
+                    zeroLineWidth: 0,
                 },
                 ticks: {
                     fontFamily: "'Open Sans Bold', sans-serif",
-                    fontSize:11
+                    fontSize:11,
+                    max:100,
+                    min:0
                 },
                 stacked: true
             }]
@@ -512,8 +514,11 @@ window.onload = function(){
           }],
           yAxes: [{
             stacked: true,
+            display:true,
             ticks: {
               beginAtZero: true,
+              max:100,
+              min:0
             },
             type: 'linear',
           }]

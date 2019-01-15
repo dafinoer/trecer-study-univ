@@ -97,7 +97,7 @@ class Quizioner(LoginRequiredMixin, View):
 
                     for k, v in value.items():
 
-                        value_data = v['rating']
+                        value_data = int(v)
 
                         tool = Tool(value_data, k, key)
 
@@ -105,6 +105,46 @@ class Quizioner(LoginRequiredMixin, View):
                     
                     del k
                     del v
+                
+                elif key == '48':
+                    print('ini val > ', value)
+
+                    try:
+                        get_id_kategories = Question.objects.get(id=key)
+
+
+                        query_to_survey = Tool(
+                                int(value), 
+                                key,
+                                get_id_kategories.ketegories_id
+                            )
+                        
+                        query_to_survey.save_database()
+
+                    except Exception as identifier:
+                        print(identifier)
+
+                    del query_to_survey
+                    del get_id_kategories
+
+                elif key == '49':
+
+                    try:
+                        ketegories_data = Question.objects.get(id=key)
+
+                        query_data_survey = Tool(
+                            int(value),
+                            key,
+                            ketegories_data.ketegories_id
+                        )
+
+                        query_data_survey.save_database()
+
+                    except Exception as identifier:
+                        print(identifier)
+
+                    del ketegories_data
+                    del query_data_survey
 
                 elif key == '9':
                     print('ini value kedua valuenya > ',value)
@@ -161,14 +201,10 @@ class Quizioner(LoginRequiredMixin, View):
 
                         try:
                             tool = Tool(data_value, data_key, key)
-                            
                             tool.save_database()
-
                             print('12 succes save')
-
                         except Exception as e:
                             print(e)
-
                         
                     del data_key
                     del data_value
@@ -231,14 +267,13 @@ class Quizioner(LoginRequiredMixin, View):
 
                             print(e)
 
-                        
-
                         tool_18.save_database()
 
                 elif key == '19':
                     print('ini value kategori 19 ', value)
 
-                    value_data_19 = value['76']['Column 1']
+                    value_data_19 = int(value['76'])
+
                     value_key_question = list(value.keys())[0]
 
                     tool_19 = Tool(value_data_19, value_key_question, key)
@@ -272,7 +307,7 @@ class Quizioner(LoginRequiredMixin, View):
 
                         try:
                             
-                            value_data_key_22 = data_value_22['Column 1']
+                            value_data_key_22 = int(data_value_22)
                             
                             tool_22 = Tool(value_data_key_22, data_key_22, key)
 
@@ -289,7 +324,7 @@ class Quizioner(LoginRequiredMixin, View):
 
 
                         try:
-                            value_data_key_23 = data_value_23['Column 1']
+                            value_data_key_23 = int(data_value_23)
 
                             tool_23 = Tool(value_data_key_23, data_key_23, key)
 

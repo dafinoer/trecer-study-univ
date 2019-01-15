@@ -30,7 +30,43 @@ var data_pertanyaan_17 = f17_data();
 var surveyJSON = {
     pages: [{
         name: "page1",
-        elements: [{
+        elements: [
+            {
+                type: "text",
+                name: "48",
+                title: "berapa bulan anda mencari pekerjaan ketika belum lulus ?",
+                isRequired: true,
+                validators: [
+                    {
+                     type: "numeric"
+                    },
+                    {
+                     type: "numeric",
+                     text: "must number",
+                     minValue: 0
+                    }
+                ],
+                inputType: "number",
+                size: 22
+            }, {
+                type: "text",
+                name: "49",
+                title: "berapa bulan anda mencari pekerjaan ketika  sudah lulus ?",
+                isRequired: true,
+                validators: [
+                    {
+                     type: "numeric"
+                    },
+                    {
+                     type: "numeric",
+                     text: "must number",
+                     minValue: 0
+                    }
+                ],
+                inputType: "text"
+            },
+            /*
+            {
             type: "multipletext",
             name: "9",
             title: "Kapan anda mulai mencari pekerjaan ? ",
@@ -46,40 +82,61 @@ var surveyJSON = {
                 inputType:'number',
             }],
             itemSize: 3
-        }, {
-            type: "matrixdropdown",
+        }, 
+        */
+        {
+            type: "matrix",
             name: "8",
-            title: "Menurut anda seberapa besar penekanan pada metode pembelajaran dibawah ini dilaksanakan di program studi anda?",
+            title:"Menurut anda seberapa besar penekanan pada metode pembelajaran dibawah ini dilaksanakan di program studi anda?",
             isRequired: true,
-            columns: [{
-                name: "rating",
-                title: "rating",
-                isRequired: true
-            }],
-            choices: [1, 2, 3, 4, 5],
-            rows: [{
-                value: "39",
-                text: "Perkulihan"
-            }, {
-                value: "40",
-                text: "Demonstrasi"
-            }, {
-                value: "41",
-                text: "Partisipasi dalam proyek riset"
-            }, {
-                value: "42",
-                text: "Magang"
-            }, {
-                value: "43",
-                text: "Praktiktum"
-            }, {
-                value: "44",
-                text: "kerja Lapangan"
-            }, {
-                value: "45",
-                text: "Diskusi"
-            }]
-        }, {
+            columns:[
+                   {
+                    value: 1,
+                    text: "sangat buruk"
+                   },
+                   {
+                    value: 2,
+                    text: "buruk"
+                   },
+                   {
+                    value: 3,
+                    text: "cukup"
+                   },
+                   {
+                    value: 4,
+                    text: "baik"
+                   },
+                   {
+                    value: 5,
+                    text: "sangat baik"
+                   }
+            ],
+            rows: [
+                {
+                    value: "39",
+                    text: "Perkulihan"
+                }, {
+                    value: "40",
+                    text: "Demonstrasi"
+                }, {
+                    value: "41",
+                    text: "Partisipasi dalam proyek riset"
+                }, {
+                    value: "42",
+                    text: "Magang"
+                }, {
+                    value: "43",
+                    text: "Praktiktum"
+                }, {
+                    value: "44",
+                    text: "kerja Lapangan"
+                }, {
+                    value: "45",
+                     text: "Diskusi"
+                }
+            ]
+        },
+        {
             type: "checkbox",
             name: "10",
             title: "Bagaimana anda mencari pekerjaan tersebut?",
@@ -221,22 +278,39 @@ var surveyJSON = {
                 items: data_pertanyaan_12    
             },
             {
-                type: "matrixdropdown",
+                type: "matrix",
                 name: "19",
                 title: "Seberapa erat hubungan antara bidang studi dengan pekerjaan anda saat ini?",
                 isRequired: true,
                 columns: [
-                    {
-                        name: "Column 1"
-                    }
+                       {
+                        value: 1,
+                        text: "sangat buruk"
+                       },
+                       {
+                        value: 2,
+                        text: "buruk"
+                       },
+                       {
+                        value: 3,
+                        text: "cukup"
+                       },
+                       {
+                        value: 4,
+                        text: "baik"
+                       },
+                       {
+                        value: 5,
+                        text: "sangat baik"
+                       }
                 ],
-                choices: [
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                ],
+                // choices: [
+                //     1,
+                //     2,
+                //     3,
+                //     4,
+                //     5
+                // ],
                 rows: data_pertanyaan_13
             }
         ]
@@ -260,40 +334,60 @@ var surveyJSON = {
                 choices: data_pertanyaan_15 //
             },
             {
-                type: "matrixdropdown",
+                type: "matrix",
                 name: "22",
                 title: "Pada saat lulus, pada tingkat mana kompetensi dibawah ini anda kuasi",
                 isRequired: true,
                 columns: [
-                    {
-                        name: "Column 1"
-                    }
-                ],
-                choices: [
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
+                       {
+                        value: 1,
+                        text: "sangat buruk"
+                       },
+                       {
+                        value: 2,
+                        text: "buruk"
+                       },
+                       {
+                        value: 3,
+                        text: "cukup"
+                       },
+                       {
+                        value: 4,
+                        text: "baik"
+                       },
+                       {
+                        value: 5,
+                        text: "sangat baik"
+                       }
                 ],
                 rows: data_pertanyaan_16 // value texxt
             },
             {
-                type: "matrixdropdown",
+                type: "matrix",
                 name: "23",
                 title: "Pada saat lulus, bagaimana kontribusi pergruan tinggi dalam hal kompetensi di bawah ini?",
                 isRequired: true,
                 columns: [
-                    {
-                        name: "Column 1"
-                    }
-                ],
-                choices: [
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
+                      {
+                        value: 1,
+                        text: "sangat buruk"
+                       },
+                       {
+                        value: 2,
+                        text: "buruk"
+                       },
+                       {
+                        value: 3,
+                        text: "cukup"
+                       },
+                       {
+                        value: 4,
+                        text: "baik"
+                       },
+                       {
+                        value: 5,
+                        text: "sangat baik"
+                       }
                 ],
                 rows: data_pertanyaan_17 // value texxt
             },
