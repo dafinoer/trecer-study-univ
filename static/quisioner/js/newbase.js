@@ -218,6 +218,60 @@ var surveyJSON = {
           //isRequired: true
          },
          {
+            type: "radiogroup",
+            name: "check1",
+            title: "Kapankah anda mendapat pekerjaan pertama ?",
+            isRequired: true,
+            choices: [
+                {
+                    value: "1",
+                    text: "sebelum lulus"
+                },
+                {
+                    value: "2",
+                    text: "setelah lulus"
+                }
+            ]
+         },
+         {
+            type: "text",
+            name: "52",
+            visibleIf: "{check1} = \"1\"",
+            title: "Berapa bulan waktu yang dihabiskan sebelum anda lulus untuk mendapatkan pekerjaan pertama",
+            isRequired: true,
+            validators: [
+                {
+                    type: "numeric"
+                },
+                {
+                    type: "numeric",
+                    text: "must number",
+                    minValue: 0
+                }
+            ],
+            inputType: "number",
+            maxLength: 0 
+         },
+         {
+            type: "text",
+            name: "53",
+            visibleIf: "{check1} = \"2\"",
+            title: "Berapa bulan waktu yang dihabiskan sesudah anda lulus untuk mendapatkan pekerjaan pertama",
+            isRequired: true,
+            validators: [
+                {
+                    type: "numeric"
+                },
+                {
+                    type: "numeric",
+                    text: "must number",
+                    minValue: 0
+                }
+            ],
+            inputType: "number"
+         },
+         /*
+         {
             type: "multipletext",
             name: "12",
             title: "Berapa bulan waktu yang dihabiskan (sebelum dan sesudah kelulusan) untuk memperoleh pekerjaan pertama?",
@@ -225,6 +279,7 @@ var surveyJSON = {
             //isRequired:true,
             items: k
          },
+        */
          {
             type: "multipletext",
             name: "13",
@@ -325,7 +380,6 @@ var surveyJSON = {
                 isRequired: true,
                 choices: data_pertanyaan_14 //value text
             },
-            
             {
                 type: "checkbox",
                 name: "21",

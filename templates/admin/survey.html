@@ -186,6 +186,8 @@
 
 {% block result_list %}
 
+
+
 <div class="bar">
         <canvas id='myChart' height="100"></canvas>
 </div>
@@ -661,7 +663,6 @@
                 </tr>
             </thead>
             <tbody>
-
                 {% for data in pertanyaan_f17 %}
                     
                     <tr>
@@ -674,7 +675,6 @@
                     </tr>
 
                 {% endfor %}
-
             </tbody>
         </table>
     </div>
@@ -704,6 +704,28 @@
                     {% for k, v in data.items %}
                     <td>{{v}}</td>
                     {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="result">
+        <table>
+            <thead>
+                <tr>
+                    <th><div class="text"><a href="#">Value</a></div></th>
+                    <th><div class="text"><a href="#">Total Rata-Rata</a></div></th>
+                    <th><div class="text"><a href="#">Total Koresponden</a></div></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in new_data_average %}
+                <tr>
+                    <td>{{data.0}}</td>
+                    <td>{{data.1}}</td>
+                    <td>{{data.2}}</td>
                 </tr>
                 {% endfor %}
             </tbody>

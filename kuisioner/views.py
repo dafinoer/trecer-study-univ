@@ -335,6 +335,41 @@ class Quizioner(LoginRequiredMixin, View):
                             print(e)
 
                         # tool_23.save_database()
+                elif key == '52':
+                    print('value 52 ', value)
+
+                    get_kategori_id = Question.objects.get(id=key)
+
+                    try:
+                        data_to_int = int(value)
+                        survey_input_data = Tool(
+                                data_to_int, 
+                                key, 
+                                get_kategori_id.ketegories_id
+                            )
+                        survey_input_data.save_database()
+                        print('succes 52')
+                        
+                    except Exception as identifier:
+                        print(identifier)
+
+                elif key == '53':
+                    print('value 53 ', value)
+
+                    get_id_kategori_id_23 =Question.objects.get(id=key)
+
+                    try:
+                        data_convert = int(value)
+                        survey_data_23 = Tool(
+                            data_convert,
+                            key,
+                            get_id_kategori_id_23.ketegories_id
+                        )
+
+                        survey_data_23.save_database()
+                        print('succes 53')
+                    except Exception as identifier:
+                        print(identifier)
 
                 else:
                     print('no data')

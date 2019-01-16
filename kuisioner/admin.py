@@ -606,6 +606,42 @@ class SurveyAdmin(admin.ModelAdmin):
         print(list_value)
 
         return list_value
+    
+    def new_average(self):
+        get_question_12 = Question.objects.filter(ketegories_id=12)
+
+        data_lst = []
+
+        for k in get_question_12:
+
+            value_dict ={}
+
+            get_average = 0
+
+            data_value = []
+
+            total = 0
+
+            try:
+                survey = Survey.objects.filter(question_id=k.id)
+
+                data_value = [int(data.value) for data in survey if len(data.value) != 0]
+
+                total = sum(data_value) / len(data_value)
+
+            except Exception as e:
+
+                print(e)
+            
+
+            # value_dict['jawaban'] = k.jawaban
+            # value_dict['average'] = total
+            # value_dict['total_responden'] = len(data_value)
+            data_new = (k.jawaban, '{} Bulan'.format(int(total)), len(data_value))
+
+            data_lst.append(data_new)
+        
+        return data_lst
 
     def changelist_view(self, request, extra_context=None):
         extra_context = extra_context or {}
@@ -628,6 +664,7 @@ class SurveyAdmin(admin.ModelAdmin):
         extra_context['pertanyaan_16'] = self.pertanyaan_f16()
         extra_context['pertanyaan_f17'] = self.pertanyaan_f17()
         extra_context['pertanyaa_f18'] = self.pertanyaa_f18()
+        extra_context['new_data_average'] = self.new_average()
         
 
         return super().changelist_view(
