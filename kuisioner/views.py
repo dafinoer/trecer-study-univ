@@ -292,11 +292,51 @@ class Quizioner(LoginRequiredMixin, View):
 
                     print('ini value kategori 21 ', value)
 
+                    criteria_user = False
+
+                    data_key_new = 24
+
                     for data_val_21 in value:
 
-                        tool_21 = Tool(data_val_21, data_val_21, key)
+                        if data_val_21 == '81':
+                            criteria_user = True
+                            print('ini data sesuai pekerjaan> ', data_val_21)
+                            break
+                        else:
+                            print('ini data tidak sesuai pekerjaan> ',data_val_21)
+                            break
+                    
+                    if criteria_user:
 
-                        tool_21.save_database()
+                        data_key_value = 126
+
+                        try:
+                            tools_21 = Tool(data_key_value, data_key_value, data_key_new)
+                            tools_21.save_database()
+                            del tools_21
+                        except Exception as identifier:
+                            print(identifier)
+
+                        del data_key_value
+
+                    else:
+
+                        data_key_value = 127
+
+                        try:
+                            tools_21 = Tool(data_key_value, data_key_value, data_key_new)
+                            tools_21.save_database()
+                            
+                            del tools_21
+
+                        except Exception as identifier:
+                            print(identifier)
+                        
+                        del data_key_value
+
+                        # tool_21 = Tool(data_val_21, data_val_21, key)
+
+                        # tool_21.save_database()
                 
                 elif key == '22':
                     print('ini value kategori 22 ', value)

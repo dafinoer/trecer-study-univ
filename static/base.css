@@ -90,6 +90,10 @@ body {
     background: #064CDB;
 }
 
+.bg-custome {
+    background: #455a64
+}
+
 .link-footer__link {
     margin: 0 ;
     list-style: none;
