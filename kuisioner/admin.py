@@ -35,7 +35,6 @@ class QuestionAdmin(admin.ModelAdmin):
 @admin.register(Survey)
 class SurveyAdmin(admin.ModelAdmin):
     change_list_template = 'admin/survey.html'
-    date_hierarchy = 'crated_at'
 
     class Media:
         css = {'all':('admin/css/survey.css', )}
@@ -149,8 +148,6 @@ class SurveyAdmin(admin.ModelAdmin):
 
             except Exception as e:
                 print(e)
-
-
 
             value_dict['jawaban'] = data.jawaban
             value_dict['average'] = calculate_avg
@@ -656,12 +653,16 @@ class SurveyAdmin(admin.ModelAdmin):
 
             value_total = suvey_data.count()
 
+            tot_id_kategories = Survey.objects.filter(kategories=24).count()
+
             val_dict['jawaban']  = data_v.jawaban
             val_dict['value'] = value_total
 
             value_total_responden += value_total
 
-            tuple_data = (data_v.jawaban, value_total)
+            val_tot_presentase = (value_total / tot_id_kategories) * 100
+
+            tuple_data = (data_v.jawaban, value_total, '{}%'.format(int(round(val_tot_presentase))))
 
             data_value_24.append(tuple_data)
 

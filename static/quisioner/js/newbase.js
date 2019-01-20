@@ -211,7 +211,7 @@ var surveyJSON = {
          {
           type: "text",
           name: "question2",
-          title: "Berapa perusahaan/instansi /institusi yang sudah anda lamar (lewat surat atau e-mail) sebelum anda memperoleh pekerjaan pertama?",
+          title: "Berapa perusahaan/instansi/institusi yang sudah anda lamar (lewat surat atau e-mail) sebelum anda memperoleh pekerjaan pertama?",
           inputType:"number",
           isRequired: true,
           valueName: "11",
@@ -285,7 +285,7 @@ var surveyJSON = {
             name: "13",
             title: "Berapa banyak perusahaan/instansi/institusi yang merespons/mengundang lamaran anda?",
             isRequired: true,
-            items: data_pertanyaan_f7 //[{name:"text2", title:"lorem ipsum"}]
+            items: data_pertanyaan_f7 //[{name:"text2", title:"lorem ipsum"}
          },
         ]
     },
