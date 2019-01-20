@@ -642,9 +642,38 @@ class SurveyAdmin(admin.ModelAdmin):
             data_lst.append(data_new)
         
         return data_lst
+    
+    def new_tot(self):
+        question = Question.objects.filter(ketegories_id=24)
+
+        data_value_24 = []
+
+        value_total_responden = 0
+
+        for data_v in question:
+            val_dict = {}
+            suvey_data = Survey.objects.filter(question_id=data_v.id)
+
+            value_total = suvey_data.count()
+
+            val_dict['jawaban']  = data_v.jawaban
+            val_dict['value'] = value_total
+
+            value_total_responden += value_total
+
+            tuple_data = (data_v.jawaban, value_total)
+
+            data_value_24.append(tuple_data)
+
+        to_dict_data = ('total responden', value_total_responden)
+        data_value_24.append(to_dict_data)
+
+        print('ini value 24 ', data_value_24)
+
+        return data_value_24
 
     def changelist_view(self, request, extra_context=None):
-        extra_context = extra_context or {}
+        extra_context = extra_context or {} 
         extra_context['survey'] = self.survey_jawaban()
         # extra_context['durasi'] = self.durasi()
 
@@ -665,6 +694,7 @@ class SurveyAdmin(admin.ModelAdmin):
         extra_context['pertanyaan_f17'] = self.pertanyaan_f17()
         extra_context['pertanyaa_f18'] = self.pertanyaa_f18()
         extra_context['new_data_average'] = self.new_average()
+        extra_context['new_value_total'] = self.new_tot()
         
 
         return super().changelist_view(
