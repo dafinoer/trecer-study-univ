@@ -186,6 +186,52 @@
 
 {% block result_list %}
 
+<div class="result">
+    <table>
+        <thead>
+            <tr>
+                <th><div class="text"><a href="#">value</a></div></th>
+                <th><div class="text"><a href="#">total</a></div></th>
+                <th><div class="text"><a href="#">persentage</a></div></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for data in cari_kerja %}
+            <tr>
+                <td>{{data.0}}</td>
+                <td>{{data.1}}</td>
+                <td>{{data.2}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<br>
+<div class="result">
+    <!-- 17 -->
+    <table>
+        <thead>
+            <tr>
+                <th><div class="text"><a href="#">Value</a></div></th>
+                <th><div class="text"><a href="#">Total</a></div></th>
+                <th><div class="text"><a href="#">Persentase</a></div></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in pertanyaan_f12 %}
+            <tr>
+                <td>{{data.0}}</td>
+                <td>{{data.1}}</td>
+                <td>{{data.2}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<br>
 
 <!-- dfasfsdfasdfasdfas -->
 

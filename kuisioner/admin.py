@@ -165,6 +165,8 @@ class SurveyAdmin(admin.ModelAdmin):
 
         data_dst=[]
 
+        value_data_10 = 0
+
         for data in get_question_id:
 
             value_dict= {}
@@ -173,19 +175,34 @@ class SurveyAdmin(admin.ModelAdmin):
                 type_count=Count('value')
             ).filter(question_id=data.id).order_by('-type_count')
 
-            print(survey_data)
+            surve_data_tot_10 = Survey.objects.filter()
 
             if len(survey_data) != 0:
                 value_total = survey_data[0]['type_count']
             else:
                 value_total = 0
 
+            total_data_17 = Survey.objects.filter(kategories=10).count()
+
             value_dict['jawaban'] = data.jawaban
             value_dict['total'] = value_total
 
-            data_dst.append(value_dict)
+            value_data_10 += value_total
+
+            try:
+                tot_pesentage_data = (value_total/total_data_17) * 100
+            except ZeroDivisionError as identifier:
+                print(identifier)
+                tot_pesentage_data = 0            
+
+            tuple_data_10 = (data.jawaban, value_total, '{} %'.format(round(tot_pesentage_data)))
+
+            data_dst.append(tuple_data_10)
 
         print('10 > ', data_dst)
+
+        data_dst.append(('total', value_data_10))
+        
         return data_dst
 
     def pertanyaan_f6(self):
@@ -356,16 +373,33 @@ class SurveyAdmin(admin.ModelAdmin):
 
         data_lst = []
 
+        var_data_tot_koresponden = 0
+
         for data in question:
             value_dict = {}
 
             survey = Survey.objects.filter(question_id=data.id).count()
+            total_data_17 = Survey.objects.filter(kategories=17).count()
+
             value_dict['jawaban'] = data.jawaban
             value_dict['total'] = survey
 
-            data_lst.append(value_dict)
+            var_data_tot_koresponden += survey
+
+            try:
+                tot_persentage_17 = (survey / total_data_17) * 100
+            except ZeroDivisionError as identifier:
+                print(identifier)
+                tot_persentage_17 = 0
+
+
+            tupple_data = (data.jawaban, survey, '{} %'.format(round(tot_persentage_17)))
+
+            data_lst.append(tupple_data)
 
         print('17 > ',data_lst)
+
+        data_lst.append(('Total Koresponden', var_data_tot_koresponden))
 
         return data_lst
     
@@ -660,7 +694,11 @@ class SurveyAdmin(admin.ModelAdmin):
 
             value_total_responden += value_total
 
-            val_tot_presentase = (value_total / tot_id_kategories) * 100
+            try:
+                val_tot_presentase = (value_total / tot_id_kategories) * 100
+            except ZeroDivisionError as identifier:
+                print(identifier)
+                val_tot_presentase = 0
 
             tuple_data = (data_v.jawaban, value_total, '{}%'.format(int(round(val_tot_presentase))))
 
